@@ -10,6 +10,9 @@ export default function Home() {
    <h1>
      HEllo world
    </h1>
+
+<button>This is a button</button>
+
    </>
   )
 }
