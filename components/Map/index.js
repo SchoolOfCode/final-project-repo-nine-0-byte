@@ -1,8 +1,10 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-const position = [51.505, -0.09];
+// const position = [51.505, -0.09];
 
-export default function Map({ location }) {
+
+export default function Map({location}) {
+
   return (
     <MapContainer center={location} zoom={13} scrollWheelZoom={false}>
       <TileLayer
