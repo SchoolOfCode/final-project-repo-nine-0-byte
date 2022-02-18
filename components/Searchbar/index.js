@@ -1,8 +1,18 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Searchbar({ setLocation, searchSubmit }) {
   const [postcode, setPostcode] = useState("");
+  useEffect(() => {
+    async function getApiLocation() {
+      let request = await fetch(
+        `https://api.postcodes.io/postcodes/${postcode}`
+      );
+      const data = await request.json();
+      setLocation(data.result.latitude, data.result.longitude);
+    }
+    getApiLocation();
+  }, [postcode]);
   function inputSearch(e) {
     setPostcode(e.target.value);
     console.log("setPostcode", e.target.value);
