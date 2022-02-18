@@ -57,7 +57,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="Postcodes.io" style="shape=delay;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
-                    <mxGeometry x="-60" y="270" width="80" height="40" as="geometry"/>
+                    <mxGeometry x="-50" y="260" width="80" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="22" target="6">
                     <mxGeometry relative="1" as="geometry">
