@@ -1,10 +1,7 @@
-:root{
-
-
+:root {
   /* Colour scheme types, from colourmind.io http://colormind.io/bootstrap/ .
   Can return to using colour schemes 
   */
-
 
   --main-brand-color: #3d348bff;
   --light-shade: #7678edff;
@@ -12,38 +9,19 @@
   --dark-accent: #f18701ff;
   --dark-shade: #f35b04ff;
 
-
-
-
-/* --cosmic-cobalt: #3d348bff;
+  /* --cosmic-cobalt: #3d348bff;
 --medium-slate-blue: #7678edff;
 --mango: #f7b801ff;
 --tangerine: #f18701ff;
---persimmon: #f35b04ff; */ 
-
+--persimmon: #f35b04ff; */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
 
 /* Colour scheme alternate formats below */
-
-
-
-
-
 
 /* CSS HSL 
 --cosmic-cobalt: hsla(246, 46%, 37%, 1);
@@ -83,4 +61,3 @@ $gradient-bottom-left: linear-gradient(315deg, #3d348bff, #7678edff, #f7b801ff, 
 $gradient-radial: radial-gradient(#3d348bff, #7678edff, #f7b801ff, #f18701ff, #f35b04ff);
 
 */
-
