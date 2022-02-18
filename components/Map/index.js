@@ -12,7 +12,7 @@ export default function Map({location}) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      <Marker position={position}>
+      <Marker position={location}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>

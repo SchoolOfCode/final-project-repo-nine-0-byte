@@ -1,17 +1,17 @@
 import {useState, useEffect} from 'react';
 export default function useGeoLocation(){
-  const [position, setPosition] = useState({});
+  const [location, setLocation] = useState([]);
   const [error, setError] = useState(null);
   
   const onChange = ({coords}) => {
-    setPosition({
-      latitude: coords.latitude,
-      longitude: coords.longitude,
-    });
+    setLocation([
+      coords.latitude,
+      coords.longitude,
+    ]);
   };
   const onError = (error) => {
     setError(error.message);
-    setPosition({latitude:51.505, longitude:-0.09})
+    setLocation([51.505, -0.09]) // Default if error 
   };
   useEffect(() => {
     const geo = navigator.geolocation;
@@ -22,6 +22,8 @@ export default function useGeoLocation(){
     let watcher = geo.watchPosition(onChange, onError);
     return () => geo.clearWatch(watcher);
   }, []);
-  return {...position, error};
+
+  
+  return [location, setLocation];
 }
 
