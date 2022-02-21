@@ -18,9 +18,9 @@ NearbyPOI:[{"Greggs", latLong}]
 
 const dummyData = [
   {
-    name: "Crewe",
-    lat: 53.09787,
-    long: -2.44161,
+    name: "Central London",
+    lat: 51.505,
+    long: -0.09,
     connectors: [{ type: "10kw" }],
     fast: true,
     rapid: false,
@@ -32,9 +32,9 @@ const dummyData = [
     nearbypoi: [{ restaurant: "Greggs" }],
   },
   {
-    name: "London",
-    lat: 51.5072,
-    long: 0.1276,
+    name: "London1",
+    lat: 51.8072,
+    long: -0.2276,
     connectors: [{ type: "20kw" }],
     fast: false,
     rapid: true,
@@ -46,3 +46,5 @@ const dummyData = [
     nearbypoi: [{ restaurant: "Greggs" }],
   },
 ];
+
+export default dummyData;
