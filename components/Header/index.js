@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../public/shortcircuitlogo.ico";
+import logo from "../../public/shortcircuitlogo.png";
 import Image from "next/image";
 import css from "../../styles/Home.module.css";
 
