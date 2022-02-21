@@ -5,23 +5,23 @@ import dummyData from "../../utils/dummy-data/index.js";
 
 export default function Map({ location }) {
   return (
-    <MapContainer center={location} zoom={13} scrollWheelZoom={false}>
+    <MapContainer center={location} zoom={16} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* <Marker position={location}>
+      <Marker position={location}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily (ustomizable.
         </Popup>
-      </Marker> */}
-      dummyData.map(function(item, i)(
-      <Marker position={[item.lat, item.long]}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
       </Marker>
-      ))
+      {dummyData.map((item, i) => (
+        <Marker position={[item.lat, item.long]} key={i}>
+          <Popup>
+            A pretty Callum popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 }
