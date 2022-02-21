@@ -48,7 +48,7 @@ const dummyData = [
   {
     name: "London2",
     lat: 51.5072,
-    long: -0.2276,
+    long: -0.2275,
     connectors: [{ type: "20kw" }],
     fast: false,
     rapid: true,
