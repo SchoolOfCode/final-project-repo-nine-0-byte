@@ -16,8 +16,7 @@ export default function useGeoLocation() {
       setError("Geolocation is not supported");
       return;
     }
-    let watcher = geo.watchPosition(onChange, onError);
-    return () => geo.clearWatch(watcher);
+    let watcher = geo.getCurrentPosition(onChange, onError);
   }, []);
 
   return [location, setLocation];
