@@ -5,7 +5,7 @@ import Style from "./header.module.css";
 
 export default function Header() {
   return (
-    <header>
+    <header className={Style.container}>
       <div className={Style.header}>
         <h1>Short</h1>
         <div className={Style.logo}>
@@ -18,8 +18,8 @@ export default function Header() {
           />
         </div>
         <h1>Circuit</h1>
+        <p>To go or not to go</p>
       </div>
-      <p>To go or not to go</p>
     </header>
   );
 }

@@ -7,3 +7,13 @@
   align-items: center;
   justify-content: center;
 }
+
+.container {
+  background-color: var(--main-brand-color);
+  color: var(--light-accent);
+}
+
+.header p {
+  text-align: center;
+  margin: 0 auto;
+}
