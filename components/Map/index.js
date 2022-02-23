@@ -19,30 +19,17 @@ export default function Map({ location, pointsNearby }) {
           />
 
           <Marker position={location}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily (ustomizable.
-            </Popup>
+            <Popup>You are here.</Popup>
           </Marker>
 
-
-
-
-          {pointsNearby&&pointsNearby.map((item, i) => (
-            <Marker position={[item.lat, item.long]} key={i}>
-              <Popup>
-               <p>{item.name}</p>
-              </Popup>
-            </Marker>
-          ))}
-
-
-
-
-
-
-
-
-
+          {pointsNearby &&
+            pointsNearby.map((item, i) => (
+              <Marker position={[item.lat, item.long]} key={i}>
+                <Popup>
+                  <p>{item.name}</p>
+                </Popup>
+              </Marker>
+            ))}
         </MapContainer>
       </div>
     </>

@@ -2,7 +2,8 @@ import Searchbar from "../components/Searchbar";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import useGeoLocation from "../utils/hooks/useGeoLocation";
-import {API} from "../config.js"
+import { API } from "../config.js";
+import useGetPOI from "../utils/hooks/useGetPOI";
 
 //import Map from "../components/Map";
 
@@ -30,19 +31,7 @@ export default function Home() {
     getApiLocation();
   }, [postcode]);
 
-  
-  const [pointsNearby, setPointsNearby] = useState()
-  useEffect(async ()=>{
-
-    const call = async ()=> {
-      const res = await fetch(`https://short-circut-api.herokuapp.com/chargingstation?lat=${location[0]}&long=${location[1]}`).then(res=>res.json())
-      return await res
-    }
-
-    setPointsNearby( await call())
-  },[location])
-
- 
+  const [pointsNearby] = useGetPOI(location);
 
   function searchSubmit(lat, long) {
     setLocation([lat, long]);
@@ -56,10 +45,7 @@ export default function Home() {
         searchSubmit={searchSubmit}
         setPostcode={setPostcode}
       />
-      <Map 
-      location={location} 
-      pointsNearby={pointsNearby}
-        />
+      <Map location={location} pointsNearby={pointsNearby} />
     </>
   );
 }
