@@ -5,7 +5,7 @@ import Searchbar from "../Searchbar/index.js";
 
 // const position = [51.505, -0.09];
 
-export default function Map({ location }) {
+export default function Map({ location, pointsNearby }) {
   return (
     <>
       <div className={Style.searchOverlay}>
@@ -23,13 +23,26 @@ export default function Map({ location }) {
               A pretty CSS3 popup. <br /> Easily (ustomizable.
             </Popup>
           </Marker>
-          {dummyData.map((item, i) => (
+
+
+
+
+          {pointsNearby&&pointsNearby.map((item, i) => (
             <Marker position={[item.lat, item.long]} key={i}>
               <Popup>
-                A pretty Callum popup. <br /> Easily customizable.
+               <p>{item.name}</p>
               </Popup>
             </Marker>
           ))}
+
+
+
+
+
+
+
+
+
         </MapContainer>
       </div>
     </>
