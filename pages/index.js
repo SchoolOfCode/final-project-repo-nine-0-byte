@@ -2,6 +2,8 @@ import Searchbar from "../components/Searchbar";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import useGeoLocation from "../utils/hooks/useGeoLocation";
+import { API } from "../config.js";
+import useGetPOI from "../utils/hooks/useGetPOI";
 
 //import Map from "../components/Map";
 
@@ -29,7 +31,9 @@ export default function Home() {
     getApiLocation();
   }, [postcode]);
 
- 
+
+  const [pointsNearby] = useGetPOI(location);
+
 
   function searchSubmit(lat, long) {
     setLocation([lat, long]);
@@ -38,14 +42,18 @@ export default function Home() {
 
   return (
     <>
-      <Searchbar
+      
+      <Map
+        location={location}
         setLocation={setLocation}
         searchSubmit={searchSubmit}
         setPostcode={setPostcode}
+        pointsNearby={pointsNearby}
       />
-      <Map location={location} />
+
+
     </>
   );
 }
 
-//DEV Branch 0.2
+//Plugging in backend
