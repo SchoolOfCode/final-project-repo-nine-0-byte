@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import Style from "./style.module.css";
 
 function Searchbar({ setPostcode, searchSubmit }) {
   const [input, setInput] = useState("");
@@ -13,7 +14,12 @@ function Searchbar({ setPostcode, searchSubmit }) {
         e.preventDefault();
       }}
     >
-      <input onChange={inputSearch} placeholder="Search Bar" />
+      <input
+        onChange={inputSearch}
+        placeholder="Enter your postcode"
+        autoFocus
+        className={Style.searchInput}
+      />
       <button onClick={() => setPostcode(input)}>Search</button>
     </form>
   );

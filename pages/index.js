@@ -31,7 +31,9 @@ export default function Home() {
     getApiLocation();
   }, [postcode]);
 
+
   const [pointsNearby] = useGetPOI(location);
+
 
   function searchSubmit(lat, long) {
     setLocation([lat, long]);
@@ -40,12 +42,16 @@ export default function Home() {
 
   return (
     <>
-      <Searchbar
+      
+      <Map
+        location={location}
         setLocation={setLocation}
         searchSubmit={searchSubmit}
         setPostcode={setPostcode}
+        pointsNearby={pointsNearby}
       />
-      <Map location={location} pointsNearby={pointsNearby} />
+
+
     </>
   );
 }
