@@ -29,8 +29,6 @@ export default function Home() {
     getApiLocation();
   }, [postcode]);
 
- 
-
   function searchSubmit(lat, long) {
     setLocation([lat, long]);
     console.log("Submitted", lat, long);
@@ -38,12 +36,17 @@ export default function Home() {
 
   return (
     <>
-      <Searchbar
+      {/* <Searchbar
+        setLocation={setLocation}
+        searchSubmit={searchSubmit}
+        setPostcode={setPostcode}
+      /> */}
+      <Map
+        location={location}
         setLocation={setLocation}
         searchSubmit={searchSubmit}
         setPostcode={setPostcode}
       />
-      <Map location={location} />
     </>
   );
 }

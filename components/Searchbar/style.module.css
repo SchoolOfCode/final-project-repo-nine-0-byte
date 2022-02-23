@@ -1,0 +1,8 @@
+.searchInput{
+  width: 10rem;
+  /* background-color: var(--light-shade); */
+  color: var(--light-accent);
+  border: 0.1rem solid var(--light-accent);
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.4rem;
+}

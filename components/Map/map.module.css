@@ -7,13 +7,13 @@ Change pixels values to more responsive units;
 
 .mapContainer {
   position: relative;
-  z-index: -10;
+  z-index: 0;
 }
 
-.searchOverlay{
-  border: 1px solid red;
+.searchOverlay {
+  /* border: 1px solid red; */
   position: absolute;
+  top: 6rem;
+  left: 4rem;
   z-index: 2;
-  top: 100px;
-  right: 101px;
 }
