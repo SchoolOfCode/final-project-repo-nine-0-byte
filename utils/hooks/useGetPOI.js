@@ -12,7 +12,7 @@ export default function useGetPOI(location) {
             `https://short-circut-api.herokuapp.com/chargingstation?lat=${location[0]}&long=${location[1]}`
           ).then((res) => res.json());
 
-          if (typeof await res !== Array) { throw "Incorrect type back from API" }
+          // if (typeof await res !== Array) { throw "Incorrect type back from API" }
         } catch (err) {
           console.error(err + " Check that Heroku has not crashed pls :D")
           res = undefined
