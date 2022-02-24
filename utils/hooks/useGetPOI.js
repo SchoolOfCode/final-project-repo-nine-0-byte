@@ -20,7 +20,7 @@ export default function useGetPOI(location) {
 
         return await res;
       };
-
+console.log(location)
       setPointsNearby(await call());
     })();
   }, [location]);

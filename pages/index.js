@@ -1,8 +1,5 @@
-import Searchbar from "../components/Searchbar";
 import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
 import useGeoLocation from "../utils/hooks/useGeoLocation";
-import { API } from "../config.js";
 import useGetPOI from "../utils/hooks/useGetPOI";
 import useGetCoordsFromPostcode from "../utils/hooks/useGetCoordsFromPostcode";
 
@@ -15,15 +12,12 @@ export default function Home() {
   const [pointsNearby] = useGetPOI(location);
   return (
     <>
-      
       <Map
         location={location}
         setLocation={setLocation}
         setPostcode={setPostcode}
         pointsNearby={pointsNearby}
       />
-
-
     </>
   );
 }
