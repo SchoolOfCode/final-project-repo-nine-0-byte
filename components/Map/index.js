@@ -2,25 +2,23 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import dummyData from "../../utils/dummy-data/index.js";
 import Style from "./map.module.css";
 import Searchbar from "../Searchbar/index.js";
+import { useState } from "react";
 
 // const position = [51.505, -0.09];
-
-
 
 export default function Map({
   location,
   pointsNearby,
   setLocation,
-  searchSubmit,
+  // searchSubmit,
   setPostcode,
 }) {
-
   return (
     <>
       <div className={Style.searchOverlay}>
         <Searchbar
           setLocation={setLocation}
-          searchSubmit={searchSubmit}
+          // searchSubmit={searchSubmit}
           setPostcode={setPostcode}
         />
       </div>

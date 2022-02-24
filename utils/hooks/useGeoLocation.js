@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 export default function useGeoLocation() {
-  const [location, setLocation] = useState([51.505, -0.09]);
+  const [location, setLocation] = useState([51.50998,-0.117098]);
   const [error, setError] = useState(null);
 
   const onChange = ({ coords }) => {
@@ -8,7 +8,7 @@ export default function useGeoLocation() {
   };
   const onError = (error) => {
     setError(error.message);
-    setLocation([51.505, -0.09]); // Default if error
+    // setLocation([51.505, -0.09]); // Default if error
   };
   useEffect(() => {
     const geo = navigator.geolocation;
