@@ -7,6 +7,7 @@ export default function useGetCoordsFromPostcode(setLocation){
   //state and useEffect that is handling our fetching from API poctocdes.io
   const [postcode, setPostcode] = useState("WC2R 2PP");
   useEffect(() => {
+      
       if(postcode === "WC2R 2PP"){return} // Need another way to detect if this is the first post 
 
     async function getApiLocation() {
