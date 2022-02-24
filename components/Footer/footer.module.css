@@ -14,16 +14,21 @@
 }
 
 .links {
-  padding-top: 10px;
+  padding-top: 1em;
   text-align: center;
   /* padding-left: 0.5em;
   padding-right: 0.5em; */
 }
 .socialIcons {
   text-align: center;
-  padding-top: 15px;
+  padding-top: 1em;
   padding-left: 1em;
   padding-right: 1em;
+}
+
+.paddingIcon {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /*

@@ -25,15 +25,13 @@ export default function Footer() {
           </span>
         </div>
         <div className={Style.socialIcons}>
-          <AiOutlineFacebook />
-          <AiOutlineInstagram />
-          <AiOutlineTwitter />
-          <AiOutlineLinkedin />
-          <SiNextdotjs />
-          <MdAlternateEmail />
-          <div className={Style.copyright}>
-            <p>Copyright ©️ Nine-O-Byte</p>
-          </div>
+          <AiOutlineFacebook className={Style.paddingIcon} />
+          <AiOutlineInstagram className={Style.paddingIcon} />
+          <AiOutlineTwitter className={Style.paddingIcon} />
+          <AiOutlineLinkedin className={Style.paddingIcon} />
+          <SiNextdotjs className={Style.paddingIcon} />
+          <MdAlternateEmail className={Style.paddingIcon} />
+          <p>Copyright ©️ Nine-O-Byte</p>
         </div>
       </div>
     </footer>
