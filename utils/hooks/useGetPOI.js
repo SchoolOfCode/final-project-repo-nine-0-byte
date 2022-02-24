@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default function useGetPOI(location) {
+export default function useGetPOI(location, setIsLoading) {
   const [pointsNearby, setPointsNearby] = useState();
   useEffect(() => {
     (async () => {
       const call = async () => {
-        const res = undefined
+        setIsLoading(true);
+        const res = undefined;
 
         try {
           res = await fetch(
@@ -14,13 +15,13 @@ export default function useGetPOI(location) {
 
           // if (typeof await res !== Array) { throw "Incorrect type back from API" }
         } catch (err) {
-          console.error(err + " Check that Heroku has not crashed pls :D")
-          res = undefined
+          console.error(err + " Check that Heroku has not crashed pls :D");
+          res = undefined;
         }
-
+        setIsLoading(false);
         return await res;
       };
-
+      console.log(location);
       setPointsNearby(await call());
     })();
   }, [location]);

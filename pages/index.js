@@ -1,59 +1,45 @@
-import Searchbar from "../components/Searchbar";
 import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
 import useGeoLocation from "../utils/hooks/useGeoLocation";
-import { API } from "../config.js";
 import useGetPOI from "../utils/hooks/useGetPOI";
+import useGetCoordsFromPostcode from "../utils/hooks/useGetCoordsFromPostcode";
+import { useState } from "react";
+import Image from "next/image";
+import Style from "../styles/Home.module.css"
 
 //import Map from "../components/Map";
 
 export default function Home() {
   const Map = dynamic(() => import("../components/Map"), { ssr: false });
   const [location, setLocation] = useGeoLocation(); // Location is either your current location or the default location of central london
-
-  //state and useEffect that is handling our fetching from API poctocdes.io
-  const [postcode, setPostcode] = useState("WC2R 2PP");
-  useEffect(() => {
-    async function getApiLocation() {
-      try {
-        let request = await fetch(
-          `https://api.postcodes.io/postcodes/${postcode}`
-        );
-        const data = await request.json();
-        if (data.status !== 200) {
-          throw "Post code not found";
-        }
-        setLocation([data.result.latitude, data.result.longitude]);
-      } catch (err) {
-        alert(err);
-      }
-    }
-    getApiLocation();
-  }, [postcode]);
-
-
-  const [pointsNearby] = useGetPOI(location);
-
-
-  function searchSubmit(lat, long) {
-    setLocation([lat, long]);
-    console.log("Submitted", lat, long);
-  }
+  const [setPostcode] = useGetCoordsFromPostcode(setLocation);
+  const [isLoading, setIsLoading] = useState(true);
+  const [pointsNearby] = useGetPOI(location, setIsLoading);
 
   return (
     <>
-      
-      <Map
-        location={location}
-        setLocation={setLocation}
-        searchSubmit={searchSubmit}
-        setPostcode={setPostcode}
-        pointsNearby={pointsNearby}
-      />
-
-
+      {isLoading && (
+        <div className={Style.robot}>
+          <Image 
+            src="/shortcircuitrobot.gif"
+            alt="loading robot"
+            width="315"
+            height="180"
+          ></Image>
+          <h1>Loading...</h1>
+        </div>
+      )}
+      {!isLoading && (
+        <Map
+          location={location}
+          setLocation={setLocation}
+          setPostcode={setPostcode}
+          pointsNearby={pointsNearby}
+        />
+      )}
     </>
   );
 }
 
+
 //Dev5.0
+
