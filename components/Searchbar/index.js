@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Style from "./style.module.css";
 
-function Searchbar({ setPostcode, searchSubmit }) {
+function Searchbar({ setPostcode }) {
   const [input, setInput] = useState("");
   function inputSearch(e) {
     setInput(e.target.value);

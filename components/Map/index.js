@@ -11,7 +11,7 @@ export default function Map({
   location,
   pointsNearby,
   setLocation,
-  searchSubmit,
+  // searchSubmit,
   setPostcode,
 }) {
 
@@ -20,7 +20,7 @@ export default function Map({
       <div className={Style.searchOverlay}>
         <Searchbar
           setLocation={setLocation}
-          searchSubmit={searchSubmit}
+          // searchSubmit={searchSubmit}
           setPostcode={setPostcode}
         />
       </div>
