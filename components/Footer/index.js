@@ -31,7 +31,9 @@ export default function Footer() {
           <AiOutlineLinkedin className={Style.paddingIcon} />
           <SiNextdotjs className={Style.paddingIcon} />
           <MdAlternateEmail className={Style.paddingIcon} />
-          <p>Copyright ©️ Nine-O-Byte</p>
+          <div>
+            <p className={Style.copyright}>Copyright ©️ Nine-O-Byte</p>
+          </div>
         </div>
       </div>
     </footer>
