@@ -13,18 +13,29 @@ export default function Footer() {
   return (
     <footer className={Style.Foot}>
       <div>
-        <a href="#">About</a>
-        <a href="#">Contact Us</a>
-        <a href="#">Socials</a>
-
-        <AiOutlineFacebook />
-        <AiOutlineInstagram />
-        <AiOutlineTwitter />
-        <AiOutlineLinkedin />
-        <SiNextdotjs />
-        <MdAlternateEmail />
+        <div className={Style.links}>
+          <span>
+            <a href="#">About</a>
+          </span>
+          <span>
+            <a href="#">Contact Us</a>
+          </span>
+          <span>
+            <a href="#">Socials</a>
+          </span>
+        </div>
+        <div className={Style.socialIcons}>
+          <AiOutlineFacebook className={Style.paddingIcon} />
+          <AiOutlineInstagram className={Style.paddingIcon} />
+          <AiOutlineTwitter className={Style.paddingIcon} />
+          <AiOutlineLinkedin className={Style.paddingIcon} />
+          <SiNextdotjs className={Style.paddingIcon} />
+          <MdAlternateEmail className={Style.paddingIcon} />
+          <div>
+            <p className={Style.copyright}>Copyright ©️ Nine-O-Byte</p>
+          </div>
+        </div>
       </div>
-      <p>Copyright ©️ N-O-B</p>
     </footer>
   );
 }

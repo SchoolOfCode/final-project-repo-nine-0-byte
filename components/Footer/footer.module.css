@@ -4,8 +4,42 @@
   justify-content: center;
   background-color: var(--main-brand-color);
   color: var(--light-accent);
+  /* padding: 0.5em; */
 }
 .Foot a {
   text-decoration: none;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   color: var(--light-accent);
 }
+
+.links {
+  padding-top: 0.5em;
+  text-align: center;
+  /* padding-left: 0.5em;
+  padding-right: 0.5em; */
+}
+.socialIcons {
+  text-align: center;
+  padding-top: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.paddingIcon {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.copyright {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+/*
+Separate icons into different divs
+Center icons in middle
+Remove social label
+Copyright has to be below About Contact Us
+Make Copyright font smaller
+*/
