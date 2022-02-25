@@ -30,10 +30,14 @@ export default function Footer() {
           <AiOutlineInstagram className={Style.paddingIcon} />
           <AiOutlineTwitter className={Style.paddingIcon} />
           <AiOutlineLinkedin className={Style.paddingIcon} />
-          <SiNextdotjs className={Style.paddingIcon} />
+
           <MdAlternateEmail className={Style.paddingIcon} />
           <div>
-            <p className={Style.copyright}>Copyright ©️ Nine-O-Byte</p>
+            <p className={Style.copyright}>
+              Made with
+              <SiNextdotjs className={Style.paddingIcon} />
+              Copyright ©️ Nine-O-Byte
+            </p>
           </div>
         </div>
       </div>
