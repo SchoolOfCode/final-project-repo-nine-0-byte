@@ -38,6 +38,12 @@ export default function Map({
               <Marker position={[item.lat, item.long]} key={i}>
                 <Popup>
                   <p>{item.name}</p>
+                  <p>Availability:{item.Available ? "Available" : "In-Use"}</p>
+                  <p>Price:{item.Price}</p>
+                  <p>Time:{item.ETA}</p>
+                  {/* <p>{item.Subscriptions.Title}</p> } */}
+                  {/* {/* <p>connectors</p>
+                  <p>{item.Connectors[0].ConnectorType}</p> */}
                 </Popup>
               </Marker>
             ))}
