@@ -27,48 +27,48 @@ export default function Filter() {
   );
 
   const connectiontypesMenu = ( //Menu Drop down
-    <Menu onClick={handleMenuClick}>
-      <label>
+    <Menu className={Style.connectorMenu} onClick={handleMenuClick}>
+      <label className={Style.checkItem}>
         3-pin Type G (BS1363)
         <input type="checkbox" defaultChecked="true" />
       </label>
       <br />
-      <label>
+      <label className={Style.checkItem}>
         JEVS G105 (CHAdeMO) DC
         <input type="checkbox" defaultChecked="true" />
       </label>
       <br />
-      <label>
+      <label className={Style.checkItem}>
         Type 1 SAEJ1772 (IEC 62196)
         <input type="checkbox" defaultChecked="true" />
-      </label>
+      </label >
       <br />
-      <label>
+      <label className={Style.checkItem}>
         Type 2 Mennekes (IEC62196){" "}
         <input type="checkbox" defaultChecked="true" />
-      </label>
+      </label >
       <br />
-      <label>
+      <label className={Style.checkItem}>
         Type 3 Scame (IEC62196)
         <input type="checkbox" defaultChecked="true" />
       </label>
       <br />
-      <label>
+      <label className={Style.checkItem}>
         CCS Type 2 Combo (IEC62196)
         <input type="checkbox" defaultChecked="true" />
       </label>
       <br />
-      <label>
+      <label className={Style.checkItem}>
         Type 2 Tesla (IEC62196) DC
         <input type="checkbox" defaultChecked="true" />
       </label>
       <br />
-      <label>
+      <label className={Style.checkItem}>
         Commando 2P+E (IEC60309)
         <input type="checkbox" defaultChecked="true" />
-      </label>
+      </label >
       <br />
-      <label>
+      <label className={Style.checkItem}>
         Commando 3P+N+E (IEC60309)
         <input type="checkbox" defaultChecked="true" />
       </label>
@@ -84,10 +84,16 @@ export default function Filter() {
   };
 
   return (
-    <form className={Style.filterContainer}>
+    <div className={Style.bg}>
+
+<form className={Style.filterContainer}>
       <h1>Filter:</h1>
       <Switch />
-      <Slider className={Style.slider} max={50} defaultValue={10} step={5} />
+      <Slider marks={{
+        0:"1mile",
+        25:"25miles",
+        50:"50miles"
+      }}className={Style.slider} max={50} defaultValue={10} step={5} />
       <Slider
         marks={marks}
         className={Style.slider}
@@ -109,6 +115,8 @@ export default function Filter() {
         </Button>
       </Dropdown>
     </form>
+    </div>
+
   );
 }
 
