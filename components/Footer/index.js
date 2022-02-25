@@ -11,6 +11,7 @@ import Style from "./footer.module.css";
 
 export default function Footer() {
   return (
+    // comment
     <footer className={Style.Foot}>
       <div>
         <div className={Style.links}>
