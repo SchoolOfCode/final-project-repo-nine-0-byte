@@ -19,6 +19,8 @@ export default function Header() {
         </div>
         <h1>Circuit</h1>
         {/* <p>To go or not to go</p> */}
+
+        <button className={Style.login}>Log In</button>
       </div>
     </header>
   );
