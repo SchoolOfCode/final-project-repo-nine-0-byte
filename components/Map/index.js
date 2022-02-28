@@ -1,10 +1,21 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
 import dummyData from "../../utils/dummy-data/index.js";
 import Style from "./map.module.css";
 import Searchbar from "../Searchbar/index.js";
 import { useState } from "react";
 
 // const position = [51.505, -0.09];
+
+const icon = L.icon({ iconUrl: "../../Icons/Bolt.svg" });
+const iconEvcar = L.icon({ iconUrl: "../../Icons/evcar.svg" });
+
+// function GetIcon(_iconSize) {
+//   return L.icon( options: {
+//     iconUrl: require("../Static/Icons/Bolt.svg"),
+//     iconSize: [_iconSize]
+//   })
+// }
 
 export default function Map({
   location,
@@ -29,13 +40,13 @@ export default function Map({
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          <Marker position={location}>
+          <Marker position={location} icon={iconEvcar}>
             <Popup>You are here.</Popup>
           </Marker>
 
           {pointsNearby &&
             pointsNearby.map((item, i) => (
-              <Marker position={[item.lat, item.long]} key={i}>
+              <Marker position={[item.lat, item.long]} icon={icon} key={i}>
                 <Popup>
                   <p>{item.name}</p>
                   <p>Availability:{item.Available ? "Available" : "In-Use"}</p>
