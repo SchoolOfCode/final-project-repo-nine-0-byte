@@ -5,6 +5,7 @@ import useGetCoordsFromPostcode from "../utils/hooks/useGetCoordsFromPostcode";
 import { useState } from "react";
 import Image from "next/image";
 import Style from "../styles/Home.module.css"
+import Filter from "../components/Filter/Filter";
 
 //import Map from "../components/Map";
 
@@ -17,9 +18,12 @@ export default function Home() {
 
   return (
     <>
+
+    {null&&(<Filter />)}
+    
       {isLoading && (
         <div className={Style.robot}>
-          <Image 
+          <Image
             src="/shortcircuitrobot.gif"
             alt="loading robot"
             width="315"
@@ -40,6 +44,4 @@ export default function Home() {
   );
 }
 
-
-//Dev5.0
-
+//Dev6.0 !!
