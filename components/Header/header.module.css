@@ -12,3 +12,16 @@
   background-color: var(--main-brand-color);
   color: var(--light-accent);
 }
+
+.authLink {
+  position: absolute;
+  right: 1rem;
+}
+.authLink a {
+  text-decoration: none;
+  color: var(--dark-shade);
+}
+.authLink a:hover{
+  text-decoration:underline;
+  color: var(--light-accent);
+}

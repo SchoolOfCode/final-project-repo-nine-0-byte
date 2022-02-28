@@ -4,7 +4,7 @@ import useGetPOI from "../utils/hooks/useGetPOI";
 import useGetCoordsFromPostcode from "../utils/hooks/useGetCoordsFromPostcode";
 import { useState } from "react";
 import Image from "next/image";
-import Style from "../styles/Home.module.css"
+import Style from "../styles/Home.module.css";
 
 //import Map from "../components/Map";
 
@@ -19,7 +19,7 @@ export default function Home() {
     <>
       {isLoading && (
         <div className={Style.robot}>
-          <Image 
+          <Image
             src="/shortcircuitrobot.gif"
             alt="loading robot"
             width="315"
@@ -40,6 +40,4 @@ export default function Home() {
   );
 }
 
-
 //Dev6.0 !!
-

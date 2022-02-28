@@ -7,7 +7,6 @@ Change pixels values to more responsive units;
 
 .mapContainer {
   position: relative;
-
   z-index: 1;
 }
 
