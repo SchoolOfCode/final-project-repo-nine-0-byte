@@ -8,8 +8,11 @@ import { DownOutlined } from "@ant-design/icons";
 
 // const position = [51.505, -0.09];
 
-const icon = L.icon({ iconUrl: "../../Icons/Bolt.svg" });
-const iconEvcar = L.icon({ iconUrl: "../../Icons/evcar.svg" });
+const icon = L.icon({ iconUrl: "../../Icons/Bolt.svg", iconAnchor: [36, 30] });
+const iconEvcar = L.icon({
+  iconUrl: "../../Icons/evcar.svg",
+  iconAnchor: [37, 35],
+});
 
 // function GetIcon(_iconSize) {
 //   return L.icon( options: {
