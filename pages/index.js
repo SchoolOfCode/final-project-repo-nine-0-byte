@@ -23,17 +23,16 @@ export default function Home() {
   //IF it's our 3-pin, filter it
   //Connectors.includes()
 
+  let connectorsFilter = ["Type 2 Mennekes (IEC62196)"];
   const newArray = pointsNearby.filter((point) => {
-    console.log(
-      point.Connectors.map((connector) => {
-        return connector.ConnectorType === "3-pin Type G (BS1363)";
-      })
-    );
-    return point.Connectors.map(
-      (connector) => connector.ConnectorType === "3-pin Type G (BS1363)"
-    );
+    for (let i = 0; i < point.Connectors.length; i++) {
+      if (connectorsFilter.includes(point.Connectors[i].ConnectorType)) {
+        return true;
+      }
+    }
   });
-  console.log("Our array:", newArray);
+  console.log("newArray", newArray);
+  console.log("poinstsNearby", pointsNearby);
 
   return (
     <>
