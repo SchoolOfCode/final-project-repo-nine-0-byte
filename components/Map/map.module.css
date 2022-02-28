@@ -10,9 +10,7 @@ Change pixels values to more responsive units;
   z-index: 1;
 }
 
-
 .searchOverlay {
-  
   position: absolute;
   top: 6rem;
   left: 4rem;
