@@ -4,6 +4,7 @@ import dummyData from "../../utils/dummy-data/index.js";
 import Style from "./map.module.css";
 import Searchbar from "../Searchbar/index.js";
 import { useState } from "react";
+import { DownOutlined } from "@ant-design/icons";
 
 // const position = [51.505, -0.09];
 
@@ -48,13 +49,33 @@ export default function Map({
             pointsNearby.map((item, i) => (
               <Marker position={[item.lat, item.long]} icon={icon} key={i}>
                 <Popup>
-                  <p>{item.name}</p>
-                  <p>Availability:{item.Available ? "Available" : "In-Use"}</p>
-                  <p>Price:{item.Price}</p>
-                  <p>Time:{item.ETA}</p>
-                  {/* <p>{item.Subscriptions.Title}</p> } */}
-                  {/* {/* <p>connectors</p>
-                  <p>{item.Connectors[0].ConnectorType}</p> */}
+                  <h4>{item.name}</h4>
+                  <p>
+                    <b>Availability:</b>{" "}
+                    {item.Available ? `Available` : `In-Use`}
+                  </p>
+                  <p>
+                    <b>Time Left:</b>{" "}
+                    {item.ETA > 0 ? `${item.ETA} min` : `None`}
+                  </p>
+                  <p>
+                    <b>Price:</b>
+                    {item.Price ? ` ${item.Price}` : ` Check at chargepoint`}
+                  </p>
+                  <p>
+                    <b>Subscriptions: </b>
+                    {item.Subscriptions ? item.Subscriptions.Title : ""}
+                  </p>
+                  <div className={Style.dropdown}>
+                    <button className={Style.dropbtn}>
+                      Connectors [{item.Connectors.length}]<DownOutlined />
+                    </button>
+                    <div className={Style.dropContent} id="connectorDrop">
+                      {item.Connectors.map((connector, i) => (
+                        <p key={i}>{connector.ConnectorType}</p>
+                      ))}
+                    </div>
+                  </div>
                 </Popup>
               </Marker>
             ))}
