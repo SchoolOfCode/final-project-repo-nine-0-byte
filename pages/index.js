@@ -12,12 +12,6 @@ import { markAssetError } from "next/dist/client/route-loader";
 //import Map from "../components/Map";
 
 export default function Home() {
-  const Map = dynamic(() => import("../components/Map"), { ssr: false });
-  const [location, setLocation] = useGeoLocation(); // Location is either your current location or the default location of central london
-  const [setPostcode] = useGetCoordsFromPostcode(setLocation);
-  const [isLoading, setIsLoading] = useState(true);
-  const [pointsNearby] = useGetPOI(location, setIsLoading);
-
   let connectorsFilter = [
     "3-pin Type G (BS1363)",
     "JEVS G105 (CHAdeMO) DC",
@@ -29,8 +23,13 @@ export default function Home() {
     "Commando 2P+E (IEC60309)",
     "Commando 3P+N+E (IEC60309)",
   ];
+  const Map = dynamic(() => import("../components/Map"), { ssr: false });
+  const [location, setLocation] = useGeoLocation(); // Location is either your current location or the default location of central london
+  const [setPostcode] = useGetCoordsFromPostcode(setLocation);
+  const [isLoading, setIsLoading] = useState(true);
+  const [markersOn, setMarkersOn] = useState([]);
+  const [pointsNearby] = useGetPOI(location, setIsLoading, setMarkersOn);
   const [filteredMarkers, setFilteredMarkers] = useState(connectorsFilter);
-  const [markersOn, setMarkersOn] = useState(useGetPOI(location, setIsLoading));
 
   function handleFilter(connectorType) {
     if (filteredMarkers.includes(connectorType)) {
@@ -62,7 +61,7 @@ export default function Home() {
       );
     }
     console.log(markersOn);
-    // return markersOn;
+    return markersOn;
   }, [filteredMarkers]);
 
   // handleFilter("Type 2 Mennekes (IEC62196)");
