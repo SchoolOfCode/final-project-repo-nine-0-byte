@@ -21,7 +21,7 @@ export default function useGetPOI(location, setIsLoading) {
         setIsLoading(false);
         return await res;
       };
-      console.log(location);
+      console.log("Passing location", location);
       setPointsNearby(await call());
     })();
   }, [location]);
