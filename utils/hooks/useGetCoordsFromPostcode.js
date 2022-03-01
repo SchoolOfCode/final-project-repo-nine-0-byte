@@ -1,14 +1,12 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-
-
-export default function useGetCoordsFromPostcode(setLocation){
-
+export default function useGetCoordsFromPostcode(setLocation) {
   //state and useEffect that is handling our fetching from API poctocdes.io
   const [postcode, setPostcode] = useState("WC2R 2PP");
   useEffect(() => {
-      
-      if(postcode === "WC2R 2PP"){return} // Need another way to detect if this is the first post 
+    if (postcode === "WC2R 2PP") {
+      return;
+    } // Need another way to detect if this is the first post
 
     async function getApiLocation() {
       try {
@@ -27,7 +25,5 @@ export default function useGetCoordsFromPostcode(setLocation){
     getApiLocation();
   }, [postcode]);
 
-
-  return [setPostcode, ]
-  
+  return [setPostcode];
 }
