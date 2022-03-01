@@ -73,7 +73,7 @@ export default function Home() {
 
   return (
     <>
-      <Filter handleFilter={handleFilter} />
+      
 
       {isLoading && (
         <div className={Style.robot}>
@@ -87,12 +87,15 @@ export default function Home() {
         </div>
       )}
       {!isLoading && (
+        <>
+        <Filter handleFilter={handleFilter} />
         <Map
           location={location}
           setLocation={setLocation}
           setPostcode={setPostcode}
           pointsNearby={markersOn}
         />
+        </>
       )}
     </>
   );

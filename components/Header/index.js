@@ -20,7 +20,7 @@ export default function Header() {
   //     </div>
   //   );
   // }
-
+  console.log(user.email)
   return (
     <header className={Style.container}>
       <div className={Style.header}>

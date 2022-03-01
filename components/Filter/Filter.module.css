@@ -3,6 +3,26 @@
     width: 100vw;
     height: 100vh;
 } */
+
+.burgerMenu{
+    bottom:20%;
+    left:4%;
+    position: absolute;
+    z-index: 10;
+    color: var(--light-accent); 
+    background-color: var(--light-shade);
+    border: none;
+    border-radius: 4%;
+}
+.closeBtn{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--main-brand-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
 .connectorMenu{
     height: 300px;
     overflow-y: auto;
@@ -15,8 +35,6 @@
     display: flex;
     justify-content:space-between;
 }
-
-
 
 .filterContainer{
     bottom:16%;

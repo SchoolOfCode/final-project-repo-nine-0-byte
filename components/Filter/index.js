@@ -7,11 +7,18 @@ import {
   message,
   Checkbox,
 } from "antd";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 
 import Style from "./Filter.module.css";
+import { useState } from "react";
 
 export default function Filter({ handleFilter }) {
+  const [hamburger, setHamburger] = useState(true);
+
+  function handleHamburger() {
+    setHamburger(!hamburger);
+  }
+
   function handleMenuClick(e) {
     message.info("Click on menu item.");
     console.log("click", e);
@@ -120,11 +127,26 @@ export default function Filter({ handleFilter }) {
   };
 
   return (
-    <div className={Style.bg}>
-      <form className={Style.filterContainer}>
-        <h1>Filter:</h1>
-        <Switch />
-        <Slider
+    <>
+      {hamburger && (
+        <button className={Style.burgerMenu} onClick={handleHamburger}>
+          <MenuOutlined />
+        </button>
+      )}
+
+      {!hamburger && (
+        <div className={Style.bg}>
+          <form className={Style.filterContainer}>
+            <div className={Style.closeBtn}>
+              <p>Filter:</p>
+              <CloseOutlined
+                onClick={() => {
+                  setHamburger(true);
+                }}
+              />
+            </div>
+
+            {/* <Slider
           marks={{
             0: "1mile",
             25: "25miles",
@@ -134,37 +156,30 @@ export default function Filter({ handleFilter }) {
           max={50}
           defaultValue={10}
           step={5}
-        />
-        <Slider
-          marks={marks}
-          className={Style.slider}
-          min={0}
-          max={1}
-          defaultValue={0.45}
-          step={0.05}
-        />
+        /> */}
+            <Slider
+              marks={marks}
+              className={Style.slider}
+              min={0}
+              max={1}
+              defaultValue={0.45}
+              step={0.05}
+            />
 
-        <Dropdown overlay={connectiontypesMenu}>
-          <Button>
-            Connection Types <DownOutlined />
-          </Button>
-        </Dropdown>
+            <Dropdown overlay={connectiontypesMenu}>
+              <Button>
+                Connection Types <DownOutlined />
+              </Button>
+            </Dropdown>
 
-        <Dropdown overlay={subscriptionMenu}>
-          <Button>
-            Subscriptions <DownOutlined />
-          </Button>
-        </Dropdown>
-      </form>
-    </div>
+            <Dropdown overlay={subscriptionMenu}>
+              <Button>
+                Subscriptions <DownOutlined />
+              </Button>
+            </Dropdown>
+          </form>
+        </div>
+      )}
+    </>
   );
-}
-
-{
-  /* 
-    Filter toggle?
-    Location (Slider int),
-    Price(Int),
-    Connection type(String, drop down),
-    Subscriptions */
 }
