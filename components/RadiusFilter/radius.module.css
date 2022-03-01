@@ -1,0 +1,13 @@
+
+.sideBar{
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.checkItem{
+    /* padding: 10px; */
+    margin: 10px; 
+    display: flex;
+    justify-content:space-between;
+}
