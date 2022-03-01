@@ -41,12 +41,12 @@ export default function Filter() {
       <label className={Style.checkItem}>
         Type 1 SAEJ1772 (IEC 62196)
         <input type="checkbox" defaultChecked="true" />
-      </label >
+      </label>
       <br />
       <label className={Style.checkItem}>
         Type 2 Mennekes (IEC62196){" "}
         <input type="checkbox" defaultChecked="true" />
-      </label >
+      </label>
       <br />
       <label className={Style.checkItem}>
         Type 3 Scame (IEC62196)
@@ -66,7 +66,7 @@ export default function Filter() {
       <label className={Style.checkItem}>
         Commando 2P+E (IEC60309)
         <input type="checkbox" defaultChecked="true" />
-      </label >
+      </label>
       <br />
       <label className={Style.checkItem}>
         Commando 3P+N+E (IEC60309)
@@ -85,38 +85,42 @@ export default function Filter() {
 
   return (
     <div className={Style.bg}>
+      <form className={Style.filterContainer}>
+        <h1>Filter:</h1>
+        <Switch />
+        <Slider
+          marks={{
+            0: "1mile",
+            25: "25miles",
+            50: "50miles",
+          }}
+          className={Style.slider}
+          max={50}
+          defaultValue={10}
+          step={5}
+        />
+        <Slider
+          marks={marks}
+          className={Style.slider}
+          min={0}
+          max={1}
+          defaultValue={0.45}
+          step={0.05}
+        />
 
-<form className={Style.filterContainer}>
-      <h1>Filter:</h1>
-      <Switch />
-      <Slider marks={{
-        0:"1mile",
-        25:"25miles",
-        50:"50miles"
-      }}className={Style.slider} max={50} defaultValue={10} step={5} />
-      <Slider
-        marks={marks}
-        className={Style.slider}
-        min={0}
-        max={1}
-        defaultValue={0.45}
-        step={0.05}
-      />
+        <Dropdown overlay={connectiontypesMenu}>
+          <Button>
+            Connection Types <DownOutlined />
+          </Button>
+        </Dropdown>
 
-      <Dropdown overlay={connectiontypesMenu}>
-        <Button>
-          Connection Types <DownOutlined />
-        </Button>
-      </Dropdown>
-
-      <Dropdown overlay={subscriptionMenu}>
-        <Button>
-          Subscriptions <DownOutlined />
-        </Button>
-      </Dropdown>
-    </form>
+        <Dropdown overlay={subscriptionMenu}>
+          <Button>
+            Subscriptions <DownOutlined />
+          </Button>
+        </Dropdown>
+      </form>
     </div>
-
   );
 }
 

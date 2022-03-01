@@ -5,7 +5,8 @@ import useGetCoordsFromPostcode from "../utils/hooks/useGetCoordsFromPostcode";
 import { useState } from "react";
 import Image from "next/image";
 import Style from "../styles/Home.module.css";
-import Filter from "../components/Filter/Filter";
+import Filter from "../components/Filter";
+import dummyData from "../utils/dummy-data";
 
 //import Map from "../components/Map";
 
@@ -15,16 +16,38 @@ export default function Home() {
   const [setPostcode] = useGetCoordsFromPostcode(setLocation);
   const [isLoading, setIsLoading] = useState(true);
   const [pointsNearby] = useGetPOI(location, setIsLoading);
-  const [markersOn, setMarkersOn] = useState();
-  //Search pointsnearby, find all points with 3-pin
-  //look at all indexes in pointsNearby
-  //in each index, check connectors array
-  // in each connector index, check ConnectorType
-  //IF it's our 3-pin, filter it
-  //Connectors.includes()
+  let connectorsFilter = [
+    "3-pin Type G (BS1363)",
+    "JEVS G105 (CHAdeMO) DC",
+    "Type 1 SAEJ1772 (IEC 62196)",
+    "Type 2 Mennekes (IEC62196)",
+    "Type 3 Scame (IEC62196)",
+    "CCS Type 2 Combo (IEC62196)",
+    "Type 2 Tesla (IEC62196) DC",
+    "Commando 2P+E (IEC60309)",
+    "Commando 3P+N+E (IEC60309)",
+  ];
+  const [markersOn, setMarkersOn] = useState(connectorsFilter);
 
-  let connectorsFilter = ["Type 2 Mennekes (IEC62196)"];
-  const newArray = pointsNearby.filter((point) => {
+  function handleFilter(connectorType) {
+    let index = connectorsFilter.indexOf(connectorType);
+    setMarkersOn([
+      ...connectorsFilter.slice(0, index),
+      ...connectorsFilter.slice(index + 1),
+    ]);
+    console.log([
+      ...connectorsFilter.slice(0, index),
+      ...connectorsFilter.slice(index + 1),
+    ]);
+  }
+  // handleFilter("Type 2 Mennekes (IEC62196)");
+  // default that cotains all the connector arrays
+  // when click on checkbox,
+  // handleClick function that calls if box is checked
+  //      - if in the array need to keep it, else remove it.
+  //      - find the index and slice it (spread & slice & spread)
+
+  const newArray = dummyData.filter((point) => {
     for (let i = 0; i < point.Connectors.length; i++) {
       if (connectorsFilter.includes(point.Connectors[i].ConnectorType)) {
         return true;
@@ -32,11 +55,13 @@ export default function Home() {
     }
   });
   console.log("newArray", newArray);
-  console.log("poinstsNearby", pointsNearby);
 
   return (
     <>
       <Filter />
+      <button onClick={() => handleFilter("Type 2 Mennekes (IEC62196)")}>
+        Filter
+      </button>
 
       {isLoading && (
         <div className={Style.robot}>
