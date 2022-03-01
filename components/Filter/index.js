@@ -11,7 +11,7 @@ import { DownOutlined, UserOutlined } from "@ant-design/icons";
 
 import Style from "./Filter.module.css";
 
-export default function Filter() {
+export default function Filter({ handleFilter }) {
   function handleMenuClick(e) {
     message.info("Click on menu item.");
     console.log("click", e);
@@ -30,47 +30,83 @@ export default function Filter() {
     <Menu className={Style.connectorMenu} onClick={handleMenuClick}>
       <label className={Style.checkItem}>
         3-pin Type G (BS1363)
-        <input type="checkbox" defaultChecked="true" />
+        <input
+          type="checkbox"
+          defaultChecked="true"
+          onClick={() => handleFilter("3-pin Type G (BS1363)")}
+        />
       </label>
       <br />
       <label className={Style.checkItem}>
         JEVS G105 (CHAdeMO) DC
-        <input type="checkbox" defaultChecked="true" />
+        <input
+          type="checkbox"
+          defaultChecked="true"
+          onClick={() => handleFilter("JEVS G105 (CHAdeMO) DC")}
+        />
       </label>
       <br />
       <label className={Style.checkItem}>
         Type 1 SAEJ1772 (IEC 62196)
-        <input type="checkbox" defaultChecked="true" />
+        <input
+          type="checkbox"
+          defaultChecked="true"
+          onClick={() => handleFilter("Type 1 SAEJ1772 (IEC 62196)")}
+        />
       </label>
       <br />
       <label className={Style.checkItem}>
-        Type 2 Mennekes (IEC62196){" "}
-        <input type="checkbox" defaultChecked="true" />
+        Type 2 Mennekes (IEC62196)
+        <input
+          type="checkbox"
+          defaultChecked="true"
+          onClick={() => handleFilter("Type 2 Mennekes (IEC62196)")}
+        />
       </label>
       <br />
       <label className={Style.checkItem}>
         Type 3 Scame (IEC62196)
-        <input type="checkbox" defaultChecked="true" />
+        <input
+          type="checkbox"
+          defaultChecked="true"
+          onClick={() => handleFilter("Type 3 Scame (IEC62196)")}
+        />
       </label>
       <br />
       <label className={Style.checkItem}>
         CCS Type 2 Combo (IEC62196)
-        <input type="checkbox" defaultChecked="true" />
+        <input
+          type="checkbox"
+          defaultChecked="true"
+          onClick={() => handleFilter("CCS Type 2 Combo (IEC62196)")}
+        />
       </label>
       <br />
       <label className={Style.checkItem}>
         Type 2 Tesla (IEC62196) DC
-        <input type="checkbox" defaultChecked="true" />
+        <input
+          type="checkbox"
+          defaultChecked="true"
+          onClick={() => handleFilter("Type 2 Tesla (IEC62196) DC")}
+        />
       </label>
       <br />
       <label className={Style.checkItem}>
         Commando 2P+E (IEC60309)
-        <input type="checkbox" defaultChecked="true" />
+        <input
+          type="checkbox"
+          defaultChecked="true"
+          onClick={() => handleFilter("Commando 2P+E (IEC60309)")}
+        />
       </label>
       <br />
       <label className={Style.checkItem}>
         Commando 3P+N+E (IEC60309)
-        <input type="checkbox" defaultChecked="true" />
+        <input
+          type="checkbox"
+          defaultChecked="true"
+          onClick={() => handleFilter("Commando 3P+N+E (IEC60309)")}
+        />
       </label>
     </Menu>
   );

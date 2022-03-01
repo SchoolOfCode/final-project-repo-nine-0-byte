@@ -2,11 +2,12 @@ import dynamic from "next/dynamic";
 import useGeoLocation from "../utils/hooks/useGeoLocation";
 import useGetPOI from "../utils/hooks/useGetPOI";
 import useGetCoordsFromPostcode from "../utils/hooks/useGetCoordsFromPostcode";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Style from "../styles/Home.module.css";
 import Filter from "../components/Filter";
 import dummyData from "../utils/dummy-data";
+import { markAssetError } from "next/dist/client/route-loader";
 
 //import Map from "../components/Map";
 
@@ -16,6 +17,7 @@ export default function Home() {
   const [setPostcode] = useGetCoordsFromPostcode(setLocation);
   const [isLoading, setIsLoading] = useState(true);
   const [pointsNearby] = useGetPOI(location, setIsLoading);
+
   let connectorsFilter = [
     "3-pin Type G (BS1363)",
     "JEVS G105 (CHAdeMO) DC",
@@ -27,19 +29,42 @@ export default function Home() {
     "Commando 2P+E (IEC60309)",
     "Commando 3P+N+E (IEC60309)",
   ];
-  const [markersOn, setMarkersOn] = useState(connectorsFilter);
+  const [filteredMarkers, setFilteredMarkers] = useState(connectorsFilter);
+  const [markersOn, setMarkersOn] = useState(useGetPOI(location, setIsLoading));
 
   function handleFilter(connectorType) {
-    let index = connectorsFilter.indexOf(connectorType);
-    setMarkersOn([
-      ...connectorsFilter.slice(0, index),
-      ...connectorsFilter.slice(index + 1),
-    ]);
-    console.log([
-      ...connectorsFilter.slice(0, index),
-      ...connectorsFilter.slice(index + 1),
-    ]);
+    if (filteredMarkers.includes(connectorType)) {
+      let index = filteredMarkers.indexOf(connectorType);
+      setFilteredMarkers([
+        ...filteredMarkers.slice(0, index),
+        ...filteredMarkers.slice(index + 1),
+      ]);
+      console.log([
+        ...filteredMarkers.slice(0, index),
+        ...filteredMarkers.slice(index + 1),
+      ]);
+    } else {
+      setFilteredMarkers([...filteredMarkers, connectorType]);
+      console.log([...filteredMarkers, connectorType]);
+    }
   }
+
+  useEffect(() => {
+    if (pointsNearby) {
+      setMarkersOn(
+        pointsNearby.filter((point) => {
+          for (let i = 0; i < point.Connectors.length; i++) {
+            if (filteredMarkers.includes(point.Connectors[i].ConnectorType)) {
+              return true;
+            }
+          }
+        })
+      );
+    }
+    console.log(markersOn);
+    // return markersOn;
+  }, [filteredMarkers]);
+
   // handleFilter("Type 2 Mennekes (IEC62196)");
   // default that cotains all the connector arrays
   // when click on checkbox,
@@ -47,21 +72,9 @@ export default function Home() {
   //      - if in the array need to keep it, else remove it.
   //      - find the index and slice it (spread & slice & spread)
 
-  const newArray = dummyData.filter((point) => {
-    for (let i = 0; i < point.Connectors.length; i++) {
-      if (connectorsFilter.includes(point.Connectors[i].ConnectorType)) {
-        return true;
-      }
-    }
-  });
-  console.log("newArray", newArray);
-
   return (
     <>
-      <Filter />
-      <button onClick={() => handleFilter("Type 2 Mennekes (IEC62196)")}>
-        Filter
-      </button>
+      <Filter handleFilter={handleFilter} />
 
       {isLoading && (
         <div className={Style.robot}>
@@ -79,7 +92,7 @@ export default function Home() {
           location={location}
           setLocation={setLocation}
           setPostcode={setPostcode}
-          pointsNearby={pointsNearby}
+          pointsNearby={markersOn}
         />
       )}
     </>

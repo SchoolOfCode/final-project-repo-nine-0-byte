@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import dummyData from "../../utils/dummy-data/index.js";
 import Style from "./map.module.css";
 import Searchbar from "../Searchbar/index.js";
 import { useState } from "react";
