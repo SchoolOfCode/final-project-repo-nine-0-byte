@@ -12,7 +12,7 @@ import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import Style from "./Filter.module.css";
 import { useState } from "react";
 
-export default function Filter({ handleFilter }) {
+export default function Filter({ handleFilter, handlePrice }) {
   const [hamburger, setHamburger] = useState(true);
 
   function handleHamburger() {
@@ -164,6 +164,7 @@ export default function Filter({ handleFilter }) {
               max={1}
               defaultValue={0.45}
               step={0.05}
+              onChange={handlePrice}
             />
 
             <Dropdown overlay={connectiontypesMenu}>

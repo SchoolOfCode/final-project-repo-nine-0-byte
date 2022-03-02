@@ -30,6 +30,7 @@ export default function Home() {
   const [markersOn, setMarkersOn] = useState([]);
   const [pointsNearby] = useGetPOI(location, setIsLoading, setMarkersOn);
   const [filteredMarkers, setFilteredMarkers] = useState(connectorsFilter);
+  const [price, setPrice] = useState(1);
 
   function handleFilter(connectorType) {
     if (filteredMarkers.includes(connectorType)) {
@@ -48,12 +49,41 @@ export default function Home() {
     }
   }
 
+  // useEffect(() => {
+  //   if (pointsNearby) {
+  //     setMarkersOn(
+  //       pointsNearby.filter((point) => {
+  //         for (let i = 0; i < point.Connectors.length; i++) {
+  //           if (filteredMarkers.includes(point.Connectors[i].ConnectorType)) {
+  //             return true;
+  //           }
+  //         }
+  //       })
+  //     );
+  //   }
+  //   console.log(markersOn);
+  //   return markersOn;
+  // }, [filteredMarkers]);
+
+  function handlePrice(newPrice) {
+    setPrice(newPrice);
+  }
+
   useEffect(() => {
     if (pointsNearby) {
       setMarkersOn(
         pointsNearby.filter((point) => {
+          console.log("Price ", point.Price);
+          const numPrice =
+            point.Price === "Free"
+              ? 0
+              : +point.Price.replace(/(.)(.....)(....)/, "$2"); //£00.18/Kwh
+          console.log(numPrice);
           for (let i = 0; i < point.Connectors.length; i++) {
-            if (filteredMarkers.includes(point.Connectors[i].ConnectorType)) {
+            if (
+              filteredMarkers.includes(point.Connectors[i].ConnectorType) &&
+              numPrice <= price
+            ) {
               return true;
             }
           }
@@ -73,8 +103,6 @@ export default function Home() {
 
   return (
     <>
-      
-
       {isLoading && (
         <div className={Style.robot}>
           <Image
@@ -88,13 +116,13 @@ export default function Home() {
       )}
       {!isLoading && (
         <>
-        <Filter handleFilter={handleFilter} />
-        <Map
-          location={location}
-          setLocation={setLocation}
-          setPostcode={setPostcode}
-          pointsNearby={markersOn}
-        />
+          <Filter handleFilter={handleFilter} handlePrice={handlePrice} />
+          <Map
+            location={location}
+            setLocation={setLocation}
+            setPostcode={setPostcode}
+            pointsNearby={markersOn}
+          />
         </>
       )}
     </>
