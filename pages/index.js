@@ -31,6 +31,7 @@ export default function Home() {
   const [pointsNearby] = useGetPOI(location, setIsLoading, setMarkersOn);
   const [filteredMarkers, setFilteredMarkers] = useState(connectorsFilter);
   const [price, setPrice] = useState(1);
+  const [isAvailable, setIsAvailable] = useState(false);
 
   function handleFilter(connectorType) {
     if (filteredMarkers.includes(connectorType)) {
@@ -69,6 +70,10 @@ export default function Home() {
     setPrice(newPrice);
   }
 
+  function handleAvail() {
+    setIsAvailable(!isAvailable);
+  }
+
   useEffect(() => {
     if (pointsNearby) {
       setMarkersOn(
@@ -79,12 +84,23 @@ export default function Home() {
               ? 0
               : +point.Price.replace(/(.)(.....)(....)/, "$2"); //£00.18/Kwh
           console.log(numPrice);
+
           for (let i = 0; i < point.Connectors.length; i++) {
-            if (
-              filteredMarkers.includes(point.Connectors[i].ConnectorType) &&
-              numPrice <= price
-            ) {
-              return true;
+            if (isAvailable) {
+              if (
+                filteredMarkers.includes(point.Connectors[i].ConnectorType) &&
+                numPrice <= price &&
+                point.Available === true
+              ) {
+                return true;
+              }
+            } else {
+              if (
+                filteredMarkers.includes(point.Connectors[i].ConnectorType) &&
+                numPrice <= price
+              ) {
+                return true;
+              }
             }
           }
         })
@@ -92,7 +108,7 @@ export default function Home() {
     }
     console.log(markersOn);
     return markersOn;
-  }, [filteredMarkers]);
+  }, [filteredMarkers, price, isAvailable]);
 
   // handleFilter("Type 2 Mennekes (IEC62196)");
   // default that cotains all the connector arrays
@@ -116,7 +132,11 @@ export default function Home() {
       )}
       {!isLoading && (
         <>
-          <Filter handleFilter={handleFilter} handlePrice={handlePrice} />
+          <Filter
+            handleFilter={handleFilter}
+            handlePrice={handlePrice}
+            handleAvail={handleAvail}
+          />
           <Map
             location={location}
             setLocation={setLocation}

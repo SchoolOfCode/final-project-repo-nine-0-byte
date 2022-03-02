@@ -7,12 +7,16 @@ import {
   message,
   Checkbox,
 } from "antd";
-import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  MenuOutlined,
+  CloseSquareTwoTone,
+} from "@ant-design/icons";
 
 import Style from "./Filter.module.css";
 import { useState } from "react";
 
-export default function Filter({ handleFilter, handlePrice }) {
+export default function Filter({ handleFilter, handlePrice, handleAvail }) {
   const [hamburger, setHamburger] = useState(true);
 
   function handleHamburger() {
@@ -120,9 +124,9 @@ export default function Filter({ handleFilter, handlePrice }) {
 
   const marks = {
     0: "Free",
-    0.2: "£0.20/kwH",
-    0.5: "£0.50/kwH",
-    0.8: "£0.80/kwH",
+    0.25: "",
+    0.5: "£0.50",
+    0.8: "",
     1: "Any",
   };
 
@@ -139,7 +143,8 @@ export default function Filter({ handleFilter, handlePrice }) {
           <form className={Style.filterContainer}>
             <div className={Style.closeBtn}>
               <p>Filter:</p>
-              <CloseOutlined
+              <CloseSquareTwoTone
+                style={{ marginTop: "-1rem" }}
                 onClick={() => {
                   setHamburger(true);
                 }}
@@ -157,14 +162,15 @@ export default function Filter({ handleFilter, handlePrice }) {
           defaultValue={10}
           step={5}
         /> */}
+            <h4>Price/kwH</h4>
             <Slider
               marks={marks}
               className={Style.slider}
               min={0}
-              max={1}
+              max={0.5}
               defaultValue={0.45}
               step={0.05}
-              onChange={handlePrice}
+              onAfterChange={handlePrice}
             />
 
             <Dropdown overlay={connectiontypesMenu}>
@@ -173,11 +179,10 @@ export default function Filter({ handleFilter, handlePrice }) {
               </Button>
             </Dropdown>
 
-            <Dropdown overlay={subscriptionMenu}>
-              <Button>
-                Subscriptions <DownOutlined />
-              </Button>
-            </Dropdown>
+            <label>
+              Currently Available
+              <input type="checkbox" onClick={handleAvail} />
+            </label>
           </form>
         </div>
       )}
