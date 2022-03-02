@@ -7,7 +7,17 @@
 
 .checkItem{
     /* padding: 10px; */
-    margin: 10px; 
+
+}
+
+
+.button{
     display: flex;
+    background-color: var(--dark-accent);
+    margin: 10px; 
     justify-content:space-between;
+}
+
+.buttonSelected{
+    background-color: var(--light-shade);
 }

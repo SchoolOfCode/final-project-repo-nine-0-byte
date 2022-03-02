@@ -1,40 +1,68 @@
-import React from 'react'
-import {
-    Dropdown,
-    Menu,
-    Button,
-  } from "antd";
+import React, { useEffect, useState } from "react";
+import { Dropdown, Menu, Button } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 
-import Style from "./radius.module.css"
-  
-function RadiusFilter() {
-    const sideBar = (
-        <Menu className={Style.sideBar}>
-        <button  className= {Style.checkItem}>
-          5 Miles
-        </button>
-        <button  className={Style.checkItem}>
-          10 Miles
-        </button>
-        <button  className={Style.checkItem}>
-          15 Miles        
-        </button>
-         <button  className={Style.checkItem}>
-          20 Miles
-        </button>
-        </Menu>
-      )
+import Style from "./radius.module.css";
+
+function RadiusFilter({setDistance, postcode}) {
+
+
+
+const [selectedValue, setSelectedValue] = useState()
+
+  const [activeList, setActiveList] = useState([
+    { value: 5, bool: false },
+    { value: 10, bool: false },
+    { value: 15, bool: false },
+    { value: 20, bool: false },
+    {value:3000, bool:true}
+  ]);
+
+
+  useEffect(()=>{
+    setDistance(()=>selectedValue )
+    console.log("SET DISTANCE")
+  },[postcode])
+
+
+  function toggleActive(index) {
+    const newArray = activeList.map((v, i) =>
+      i === index ? { value: v.value, bool: true } : { value: v.value, bool: false }
+    );
+    setActiveList(()=>newArray);
+    setSelectedValue(()=>activeList.filter((v)=>v.bool === true)[0].value)
+  }
+
+  const sideBar = (
+    <Menu className={Style.sideBar}>
+ 
     
+   { activeList.map((v,i)=>{
+      return( 
+      <button 
+      onClick={(e) => {
+          e.preventDefault()
+          toggleActive(i);
+        }} 
+      className={activeList[i].bool === true ? Style.button + " " + Style.buttonSelected : Style.button} >
+        {v.value + " Miles"}
+        {console.log(v.value)}
+      </button>
+      )})
+    }  
+    </Menu>
+      
+      );
+
   return (
-      <form>
-    <Dropdown overlay={sideBar}>
+    <div>
+      <Dropdown overlay={sideBar}>
         <Button>
           Distance <DownOutlined />
         </Button>
       </Dropdown>
-      </form>
-  )
+    </div>
+  );
 }
 
 export default RadiusFilter;

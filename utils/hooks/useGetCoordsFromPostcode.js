@@ -28,6 +28,6 @@ export default function useGetCoordsFromPostcode(setLocation){
   }, [postcode]);
 
 
-  return [setPostcode, ]
+  return [postcode, setPostcode]
   
 }

@@ -27,14 +27,18 @@ export default function Map({
   setLocation,
   // searchSubmit,
   setPostcode,
+  setDistance,
+  postcode
 }) {
   return (
     <>
       <div className={Style.searchOverlay}>
         <Searchbar
+          setDistance={setDistance}
           setLocation={setLocation}
           // searchSubmit={searchSubmit}
           setPostcode={setPostcode}
+          postcode={postcode}
         />
       </div>
       <div className={Style.mapContainer}>

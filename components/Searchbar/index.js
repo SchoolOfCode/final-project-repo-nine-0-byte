@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import RadiusFilter from "../RadiusFilter";
 import Style from "./style.module.css";
 
-function Searchbar({ setPostcode }) {
+function Searchbar({ setPostcode, setDistance,postcode }) {
   const [input, setInput] = useState("");
   function inputSearch(e) {
     setInput(e.target.value);
@@ -20,6 +21,7 @@ function Searchbar({ setPostcode }) {
         autoFocus
         className={Style.searchInput}
       />
+      <RadiusFilter setDistance={setDistance} postcode={postcode}/>
       <button onClick={() => setPostcode(input)}>Search</button>
     </form>
   );
