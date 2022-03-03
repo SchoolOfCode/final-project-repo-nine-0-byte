@@ -1,12 +1,4 @@
-import {
-  Switch,
-  Slider,
-  Dropdown,
-  Menu,
-  Button,
-  message,
-  Checkbox,
-} from "antd";
+import { Switch, Slider, Dropdown, Menu, Button, message } from "antd";
 import {
   DownOutlined,
   MenuOutlined,
@@ -27,15 +19,6 @@ export default function Filter({ handleFilter, handlePrice, handleAvail }) {
     message.info("Click on menu item.");
     console.log("click", e);
   }
-
-  const subscriptionMenu = ( //Menu Drop down
-    <Menu onClick={handleMenuClick}>
-      <input type="checkbox" />
-      <input type="checkbox" />
-      <input type="checkbox" />
-      <input type="checkbox" />
-    </Menu>
-  );
 
   const connectiontypesMenu = ( //Menu Drop down
     <Menu className={Style.connectorMenu} onClick={handleMenuClick}>
@@ -126,8 +109,6 @@ export default function Filter({ handleFilter, handlePrice, handleAvail }) {
     0: "Free",
     0.25: "",
     0.5: "£0.50",
-    0.8: "",
-    1: "Any",
   };
 
   return (
@@ -139,52 +120,41 @@ export default function Filter({ handleFilter, handlePrice, handleAvail }) {
       )}
 
       {!hamburger && (
-        <div className={Style.bg}>
-          <form className={Style.filterContainer}>
-            <div className={Style.closeBtn}>
-              <p>Filter:</p>
-              <CloseSquareTwoTone
-                style={{ marginTop: "-1rem" }}
-                onClick={() => {
-                  setHamburger(true);
-                }}
-              />
-            </div>
-
-            {/* <Slider
-          marks={{
-            0: "1mile",
-            25: "25miles",
-            50: "50miles",
-          }}
-          className={Style.slider}
-          max={50}
-          defaultValue={10}
-          step={5}
-        /> */}
-            <h4>Price/kwH</h4>
-            <Slider
-              marks={marks}
-              className={Style.slider}
-              min={0}
-              max={0.5}
-              defaultValue={0.45}
-              step={0.05}
-              onAfterChange={handlePrice}
+        <form className={Style.filterContainer}>
+          <div className={Style.closeBtn}>
+            <p>Filter:</p>
+            <CloseSquareTwoTone
+              style={{ marginTop: "-1rem" }}
+              onClick={() => {
+                setHamburger(true);
+              }}
             />
+          </div>
 
-            <Dropdown overlay={connectiontypesMenu}>
-              <Button>
-                Connection Types <DownOutlined />
-              </Button>
-            </Dropdown>
+          <h4>Price/kwH</h4>
+          <Slider
+            marks={marks}
+            className={Style.slider}
+            min={0}
+            max={0.5}
+            defaultValue={0.45}
+            step={0.05}
+            onAfterChange={handlePrice}
+          />
 
+          <Dropdown overlay={connectiontypesMenu}>
+            <Button>
+              Connection Types <DownOutlined />
+            </Button>
+          </Dropdown>
+
+          <div>
             <label>
-              Currently Available
+              Currently Available{" "}
               <input type="checkbox" onClick={handleAvail} />
             </label>
-          </form>
-        </div>
+          </div>
+        </form>
       )}
     </>
   );

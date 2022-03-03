@@ -5,7 +5,7 @@ import {
   AiOutlineTwitter,
   AiOutlineLinkedin,
 } from "react-icons/ai";
-import { SiFacebook, SiNextdotjs } from "react-icons/si";
+import { SiNextdotjs } from "react-icons/si";
 import { MdAlternateEmail } from "react-icons/md";
 import Style from "./footer.module.css";
 
@@ -32,13 +32,11 @@ export default function Footer() {
           <AiOutlineLinkedin className={Style.paddingIcon} />
 
           <MdAlternateEmail className={Style.paddingIcon} />
-          <div>
-            <p className={Style.copyright}>
-              Made with
-              <SiNextdotjs className={Style.paddingIcon} />
-              Copyright ©️ Nine-O-Byte
-            </p>
-          </div>
+        </div>
+        <div className={Style.copyright}>
+          <p>Made with</p>
+          <SiNextdotjs className={Style.paddingIcon} />
+          <p>Copyright ©️ Nine-O-Byte</p>
         </div>
       </div>
     </footer>
