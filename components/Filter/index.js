@@ -8,7 +8,12 @@ import {
 import Style from "./Filter.module.css";
 import { useState } from "react";
 
-export default function Filter({ handleFilter, handlePrice, handleAvail }) {
+export default function Filter({
+  handleFilter,
+  handlePrice,
+  handleAvail,
+  isAvailable,
+}) {
   const [hamburger, setHamburger] = useState(true);
 
   function handleHamburger() {
@@ -151,7 +156,11 @@ export default function Filter({ handleFilter, handlePrice, handleAvail }) {
           <div>
             <label>
               Currently Available{" "}
-              <input type="checkbox" onClick={handleAvail} />
+              {isAvailable ? (
+                <input type="checkbox" onClick={handleAvail} checked />
+              ) : (
+                <input type="checkbox" onClick={handleAvail} />
+              )}
             </label>
           </div>
         </form>

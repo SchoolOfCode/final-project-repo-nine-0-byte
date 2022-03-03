@@ -136,6 +136,7 @@ export default function Home() {
             handleFilter={handleFilter}
             handlePrice={handlePrice}
             handleAvail={handleAvail}
+            isAvailable={isAvailable}
           />
           <Map
             location={location}
