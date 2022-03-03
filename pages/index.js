@@ -8,6 +8,8 @@ import Style from "../styles/Home.module.css";
 import Filter from "../components/Filter";
 import dummyData from "../utils/dummy-data";
 import { markAssetError } from "next/dist/client/route-loader";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 //import Map from "../components/Map";
 
@@ -116,17 +118,19 @@ export default function Home() {
   // handleClick function that calls if box is checked
   //      - if in the array need to keep it, else remove it.
   //      - find the index and slice it (spread & slice & spread)
+  const antIcon = <LoadingOutlined style={{ fontSize: 56 }} spin />;
 
   return (
     <>
       {isLoading && (
         <div className={Style.robot}>
-          <Image
+          {/* <Image
             src="/shortcircuitrobot.gif"
             alt="loading robot"
             width="315"
             height="180"
-          ></Image>
+          ></Image> */}
+          <Spin indicator={antIcon} className={Style.loader} />
           <h1>Loading...</h1>
         </div>
       )}
