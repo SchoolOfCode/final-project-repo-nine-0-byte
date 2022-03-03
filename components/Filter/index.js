@@ -7,13 +7,18 @@ import {
 
 import Style from "./Filter.module.css";
 import { useState } from "react";
+import { useUser } from "@auth0/nextjs-auth0";
+import Link from "next/link";
 
 export default function Filter({
   handleFilter,
   handlePrice,
   handleAvail,
   isAvailable,
+  handleSaveFilters,
 }) {
+  const { user } = useUser();
+
   const [hamburger, setHamburger] = useState(true);
 
   function handleHamburger() {
@@ -163,6 +168,21 @@ export default function Filter({
               )}
             </label>
           </div>
+
+          {user ? (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                console.log(handleSaveFilters());
+              }}
+            >
+              Save Filters
+            </button>
+          ) : (
+            <button>
+              <Link href="/api/auth/login">Login to save your filters</Link>
+            </button>
+          )}
         </form>
       )}
     </>

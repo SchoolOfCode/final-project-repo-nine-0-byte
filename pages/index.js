@@ -3,11 +3,9 @@ import useGeoLocation from "../utils/hooks/useGeoLocation";
 import useGetPOI from "../utils/hooks/useGetPOI";
 import useGetCoordsFromPostcode from "../utils/hooks/useGetCoordsFromPostcode";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Style from "../styles/Home.module.css";
 import Filter from "../components/Filter";
 import dummyData from "../utils/dummy-data";
-import { markAssetError } from "next/dist/client/route-loader";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
@@ -32,7 +30,7 @@ export default function Home() {
   const [markersOn, setMarkersOn] = useState([]);
   const [pointsNearby] = useGetPOI(location, setIsLoading, setMarkersOn);
   const [filteredMarkers, setFilteredMarkers] = useState(connectorsFilter);
-  const [price, setPrice] = useState(1);
+  const [price, setPrice] = useState(0.45);
   const [isAvailable, setIsAvailable] = useState(false);
 
   function handleFilter(connectorType) {
@@ -52,22 +50,6 @@ export default function Home() {
     }
   }
 
-  // useEffect(() => {
-  //   if (pointsNearby) {
-  //     setMarkersOn(
-  //       pointsNearby.filter((point) => {
-  //         for (let i = 0; i < point.Connectors.length; i++) {
-  //           if (filteredMarkers.includes(point.Connectors[i].ConnectorType)) {
-  //             return true;
-  //           }
-  //         }
-  //       })
-  //     );
-  //   }
-  //   console.log(markersOn);
-  //   return markersOn;
-  // }, [filteredMarkers]);
-
   function handlePrice(newPrice) {
     setPrice(newPrice);
   }
@@ -76,16 +58,26 @@ export default function Home() {
     setIsAvailable(!isAvailable);
   }
 
+  function handleSaveFilters() {
+    const savedFilters = {};
+    // savedFilters.userId = "";
+    savedFilters.price = price;
+    savedFilters.connectorType = [...filteredMarkers];
+    savedFilters.availability = isAvailable;
+
+    return savedFilters;
+  }
+
   useEffect(() => {
     if (pointsNearby) {
       setMarkersOn(
         pointsNearby.filter((point) => {
-          console.log("Price ", point.Price);
+          // console.log("Price ", point.Price);
           const numPrice =
             point.Price === "Free"
               ? 0
               : +point.Price.replace(/(.)(.....)(....)/, "$2"); //£00.18/Kwh
-          console.log(numPrice);
+          // console.log(numPrice);
 
           for (let i = 0; i < point.Connectors.length; i++) {
             if (isAvailable) {
@@ -108,7 +100,7 @@ export default function Home() {
         })
       );
     }
-    console.log(markersOn);
+    // console.log(markersOn);
     return markersOn;
   }, [filteredMarkers, price, isAvailable]);
 
@@ -141,6 +133,7 @@ export default function Home() {
             handlePrice={handlePrice}
             handleAvail={handleAvail}
             isAvailable={isAvailable}
+            handleSaveFilters={handleSaveFilters}
           />
           <Map
             location={location}
