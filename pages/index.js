@@ -14,7 +14,7 @@ export default function Home() {
   const [location, setLocation] = useGeoLocation(); // Location is either your current location or the default location of central london
   const [postcode, setPostcode] = useGetCoordsFromPostcode(setLocation);
   const [isLoading, setIsLoading] = useState(true);
-  const [distance, setDistance] = useState(20000000);
+  const [distance, setDistance] = useState(10);
   const [pointsNearby] = useGetPOI(location, setIsLoading, distance);
 
   useEffect(() => {

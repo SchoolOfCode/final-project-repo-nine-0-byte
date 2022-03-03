@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useGetPOI(location, setIsLoading, distance) {
+  distance = distance ?? 10
   const [pointsNearby, setPointsNearby] = useState();
   useEffect(() => {
     (async () => {
