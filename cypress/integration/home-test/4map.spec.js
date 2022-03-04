@@ -1,7 +1,7 @@
 describe("Map", () => {
-  it("should display the map", () => {
-    cy.visit("http://localhost:5000/");
-  });
+  // it("should display the map", () => {
+  //   cy.visit("http://localhost:5000/");
+  // });
 
   it("should load the map", () => {
     cy.get(".leaflet-tile-loaded").should("be.visible");
@@ -14,6 +14,6 @@ describe("Map", () => {
   it("should load the chargers positions an be clickable", () => {
     cy.get("[alt='charger-position']")
       .should("be.visible")
-      .click({ multiple: true, force: true});
+      .click({ multiple: true, force: true });
   });
 });
