@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     // comment
     <footer className={Style.Foot}>
-      <div>
+      <div className={Style.container}>
         <div className={Style.links}>
           <span>
             <a href="#">About</a>
@@ -35,7 +35,7 @@ export default function Footer() {
         </div>
         <div className={Style.copyright}>
           <p>Made with</p>
-          <SiNextdotjs className={Style.paddingIcon} alt="icon-next"/>
+          <SiNextdotjs className={Style.paddingIcon} alt="icon-next" />
           <p>Copyright ©️ Nine-O-Byte</p>
         </div>
       </div>

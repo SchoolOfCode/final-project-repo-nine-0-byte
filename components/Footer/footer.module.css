@@ -4,7 +4,12 @@
   justify-content: center;
   background-color: var(--main-brand-color);
   color: var(--light-accent);
+  position: absolute;
+  bottom: 0;
+  z-index: 0;
+  /* margin-top: 2em; */
 }
+
 .Foot a {
   text-decoration: none;
   padding-left: 0.5em;
