@@ -1,7 +1,7 @@
-.searchInput{
+.searchInput {
   width: 10rem;
   /* background-color: var(--light-shade); */
-  color: var(--light-accent);
+  color: var(--main-brand-color);
   border: 0.1rem solid var(--light-accent);
   border-radius: 0.2rem;
   padding: 0.2rem 0.4rem;
