@@ -109,7 +109,7 @@ export default function Home() {
     <>
       {isLoading && (
         <div className={Style.robot}>
-          <Spin indicator={antIcon} className={Style.loader} />
+          <Spin alt="loading-circle" indicator={antIcon} className={Style.loader} />
           <h1>Loading...</h1>
         </div>
       )}
