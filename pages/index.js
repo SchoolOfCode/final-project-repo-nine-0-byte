@@ -44,4 +44,4 @@ export default function Home() {
   );
 }
 
-//Dev 7.0 !!
+//STABLE 7.0
