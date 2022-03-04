@@ -8,8 +8,8 @@ import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
 export default function Header() {
-  const { user, error, isLoading } = useUser();
-  if (isLoading) return <div>Loading...</div>;
+  const { user, error } = useUser();
+
   if (error) return <div>{error.message}</div>;
 
   console.log(user);
@@ -42,20 +42,6 @@ export default function Header() {
           />
         </div>
         <h1>Circuit</h1>
-
-        {/* {!user && (
-          <div className={Style.authLink}>
-            <p>Login to save your filters</p>
-            <Link href="/api/auth/login">Login</Link>
-          </div>
-        )}
-        {user && (
-          <div className={Style.authLink}>
-            <p>Howdy {user.name}</p>
-            <Link href="/api/auth/logout">Logout</Link>
-          </div>
-        )}
-      </div> */}
 
         <Dropdown overlay={userLogin} className={Style.authLink}>
           <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>

@@ -47,13 +47,13 @@ export default function Map({
             attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
           />
 
-          <Marker position={location} icon={iconEvcar}>
+          <Marker position={location} icon={iconEvcar} alt="user-position">
             <Popup>You are here.</Popup>
           </Marker>
 
           {pointsNearby &&
             pointsNearby.map((item, i) => (
-              <Marker position={[item.lat, item.long]} icon={icon} key={i}>
+              <Marker position={[item.lat, item.long]} icon={icon} key={i} alt="charger-position">
                 <Popup>
                   <h4>{item.name}</h4>
                   <p>

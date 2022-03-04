@@ -123,7 +123,7 @@ export default function Home() {
         <div className={Style.robot}>
           <Image
             src="/shortcircuitrobot.gif"
-            alt="loading robot"
+            alt="loading-circle"
             width="315"
             height="180"
           ></Image>

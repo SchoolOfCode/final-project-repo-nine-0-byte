@@ -26,16 +26,16 @@ export default function Footer() {
           </span>
         </div>
         <div className={Style.socialIcons}>
-          <AiOutlineFacebook className={Style.paddingIcon} />
-          <AiOutlineInstagram className={Style.paddingIcon} />
-          <AiOutlineTwitter className={Style.paddingIcon} />
-          <AiOutlineLinkedin className={Style.paddingIcon} />
+          <AiOutlineFacebook className={Style.paddingIcon} alt="icon-face" />
+          <AiOutlineInstagram className={Style.paddingIcon} alt="icon-ig" />
+          <AiOutlineTwitter className={Style.paddingIcon} alt="icon-twit" />
+          <AiOutlineLinkedin className={Style.paddingIcon} alt="icon-link" />
 
-          <MdAlternateEmail className={Style.paddingIcon} />
+          <MdAlternateEmail className={Style.paddingIcon} alt="icon-email" />
         </div>
         <div className={Style.copyright}>
           <p>Made with</p>
-          <SiNextdotjs className={Style.paddingIcon} />
+          <SiNextdotjs className={Style.paddingIcon} alt="icon-next"/>
           <p>Copyright ©️ Nine-O-Byte</p>
         </div>
       </div>
