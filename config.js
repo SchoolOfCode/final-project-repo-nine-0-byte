@@ -1,1 +1,1 @@
-export const API = process.env.APIEND_POINT
+export const API = process.env.API_URL
