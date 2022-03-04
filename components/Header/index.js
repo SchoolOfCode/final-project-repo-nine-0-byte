@@ -4,23 +4,30 @@ import Image from "next/image";
 import Style from "./header.module.css";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
+import { Menu, Dropdown } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 
 export default function Header() {
-  const { user, error, isLoading } = useUser();
-  if (isLoading) return <div>Loading...</div>;
+  const { user, error } = useUser();
+
   if (error) return <div>{error.message}</div>;
 
-  // if (!user) {
-  //   return <a href="/api/auth/login">Login</a>;
-  // }
-  // if (user) {
-  //   return (
-  //     <div>
-  //       Welcome {user.name}! <a href="/api/auth/logout">Logout</a>
-  //     </div>
-  //   );
-  // }
+  console.log(user);
 
+  const userLogin = (
+    <Menu>
+      {!user && (
+        <Menu.Item>
+          <Link href="/api/auth/login">Login</Link>
+        </Menu.Item>
+      )}
+      {user && (
+        <Menu.Item>
+          <Link href="/api/auth/logout">Logout</Link>
+        </Menu.Item>
+      )}
+    </Menu>
+  );
   return (
     <header className={Style.container}>
       <div className={Style.header}>
@@ -35,22 +42,13 @@ export default function Header() {
           />
         </div>
         <h1>Circuit</h1>
-        {/* <p>To go or not to go</p> */}
 
-        <div className={Style.authLink}>
-          {!user && (
-            <div>
-              <p>Login to save your filters</p>
-              <Link href="/api/auth/login">Login</Link>
-            </div>
-          )}
-          {user && (
-            <div>
-              <p>Howdy {user.name}</p>
-              <Link href="/api/auth/logout">Logout</Link>
-            </div>
-          )}
-        </div>
+        <Dropdown overlay={userLogin} className={Style.authLink}>
+          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+            {!user && `User`}
+            {user && `${user.name}`} <DownOutlined />
+          </a>
+        </Dropdown>
       </div>
     </header>
   );

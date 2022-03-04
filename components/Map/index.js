@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import dummyData from "../../utils/dummy-data/index.js";
 import Style from "./map.module.css";
 import Searchbar from "../Searchbar/index.js";
 import { useState } from "react";
@@ -39,18 +38,22 @@ export default function Map({
       </div>
       <div className={Style.mapContainer}>
         <MapContainer center={location} zoom={16} scrollWheelZoom={false}>
-          <TileLayer
+          {/* <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          /> */}
+          <TileLayer
+            url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibmluZS1vLWJ5dGUiLCJhIjoiY2wwNjIyMjJnMDJ5NTNib2MzZWY0ZW41eiJ9.usTwdk_9xWVtXNDBVk78dw`}
+            attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
           />
 
-          <Marker position={location} icon={iconEvcar}>
+          <Marker position={location} icon={iconEvcar} alt="user-position">
             <Popup>You are here.</Popup>
           </Marker>
 
           {pointsNearby &&
             pointsNearby.map((item, i) => (
-              <Marker position={[item.lat, item.long]} icon={icon} key={i}>
+              <Marker position={[item.lat, item.long]} icon={icon} key={i} alt="charger-position">
                 <Popup>
                   <h4>{item.name}</h4>
                   <p>
