@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function useGetPOI(location, setIsLoading, setMarkersOn) {
-  const [pointsNearby, setPointsNearby] = useState();
+export default function useGetPOI(location, setIsLoading) {
+  const [pointsNearby, setPointsNearby] = useState([]);
   useEffect(() => {
     (async () => {
       const call = async () => {
@@ -23,7 +23,7 @@ export default function useGetPOI(location, setIsLoading, setMarkersOn) {
       };
       console.log(location);
       setPointsNearby(await call());
-      setMarkersOn(await call());
+      // setMarkersOn(await call());
     })();
   }, [location]);
   return [pointsNearby];
