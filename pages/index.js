@@ -8,6 +8,10 @@ import Filter from "../components/Filter";
 import dummyData from "../utils/dummy-data";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import useCallApi from "../utils/hooks/useBackend";
+
+
+(async ()=>console.log(await useCallApi()))()
 
 //import Map from "../components/Map";
 
