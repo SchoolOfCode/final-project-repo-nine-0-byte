@@ -36,8 +36,8 @@ export default function Home() {
   function handleFilterMenu() {
     setFilterMenu(!filterMenu);
   }
-  
-console.log("filter state", filterMenu)
+
+  console.log("filter state", filterMenu);
 
   function handleFilter(connectorType) {
     if (filteredMarkers.includes(connectorType)) {
@@ -144,4 +144,4 @@ console.log("filter state", filterMenu)
   );
 }
 
-//Dev 9.0 !!
+//Dev 9.0.byte :D!!
