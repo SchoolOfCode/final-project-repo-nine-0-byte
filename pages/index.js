@@ -5,7 +5,6 @@ import useGetCoordsFromPostcode from "../utils/hooks/useGetCoordsFromPostcode";
 import { useState, useEffect } from "react";
 import Style from "../styles/Home.module.css";
 import Filter from "../components/Filter";
-import dummyData from "../utils/dummy-data";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
@@ -106,10 +105,10 @@ export default function Home() {
   const antIcon = <LoadingOutlined style={{ fontSize: 56 }} spin />;
 
   return (
-    <>
+    <div className={Style.container}>
       {isLoading && (
-        <div className={Style.robot}>
-          <Spin alt="loading-circle" indicator={antIcon} className={Style.loader} />
+        <div className={Style.loader}>
+          <Spin alt="loading-circle" indicator={antIcon} />
           <h1>Loading...</h1>
         </div>
       )}
@@ -131,7 +130,7 @@ export default function Home() {
           />
         </>
       )}
-    </>
+    </div>
   );
 }
 

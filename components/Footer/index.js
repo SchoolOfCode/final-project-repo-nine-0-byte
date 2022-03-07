@@ -9,11 +9,22 @@ import { SiNextdotjs } from "react-icons/si";
 import { MdAlternateEmail } from "react-icons/md";
 import Style from "./footer.module.css";
 
+//Ukrainian flag
+setTimeout(
+  () =>
+    console.log(
+      "%c %c ",
+      "border-right:10rem solid blue; font-size: 2rem",
+      "border-right:10rem solid yellow; font-size: 2rem"
+    ),
+  4000
+);
+
 export default function Footer() {
   return (
     // comment
     <footer className={Style.Foot}>
-      <div>
+      <div className={Style.container}>
         <div className={Style.links}>
           <span>
             <a href="#">About</a>
@@ -35,7 +46,11 @@ export default function Footer() {
         </div>
         <div className={Style.copyright}>
           <p>Made with</p>
-          <SiNextdotjs className={Style.paddingIcon} alt="icon-next"/>
+          <SiNextdotjs
+          size="1.3rem"
+            className={(Style.paddingIcon, Style.nextIcon)}
+            alt="icon-next"
+          />
           <p>Copyright ©️ Nine-O-Byte</p>
         </div>
       </div>

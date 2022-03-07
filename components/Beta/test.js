@@ -9,6 +9,8 @@ import {
   Rectangle,
   TileLayer,
 } from "react-leaflet";
+import { Rate } from "antd";
+import { AiFillThunderbolt } from "react-icons/ai";
 
 const center = [51.505, -0.09];
 const rectangle = [
@@ -31,6 +33,11 @@ export default function LayersControlExample() {
           <Marker position={center}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
+              <br />
+              <Rate
+                defaultValue={3}
+                character={<AiFillThunderbolt />}
+              />
             </Popup>
           </Marker>
         </LayersControl.Overlay>
@@ -49,9 +56,9 @@ export default function LayersControlExample() {
             />
             <LayerGroup>
               <Circle
-                center={[51.51, -0.08]}
+                center={center}
                 pathOptions={{ color: "green", fillColor: "green" }}
-                radius={100}
+                radius={4000}
               />
             </LayerGroup>
           </LayerGroup>
