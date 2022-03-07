@@ -8,14 +8,27 @@ import Filter from "../components/Filter";
 import dummyData from "../utils/dummy-data";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import useCallApi from "../utils/hooks/useBackend";
+import useBackend from "../utils/hooks/useBackend"
 
 
-(async ()=>console.log(await useCallApi()))()
+// (async ()=>console.log(await useCallApi()))()
 
 //import Map from "../components/Map";
 
+
+
+
 export default function Home() {
+
+  const [deleteUser] = useBackend({id:"89yr9wergert792", name:"I LIVE TO DIE"})
+
+  addUser("FILTER",{
+    price : 3,
+    connector_type : ["testing, am I on heroku?"],
+    availability : true
+  })
+
+
   let connectorsFilter = [
     "3-pin Type G (BS1363)",
     "JEVS G105 (CHAdeMO) DC",
