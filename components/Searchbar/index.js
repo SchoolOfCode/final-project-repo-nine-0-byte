@@ -13,23 +13,18 @@ import cities from "../../utils/dummy-data/cities";
 //return the postcode
 //use setInput with the returned postcode
 
-//function hasNumber(myString) {
-//   return /\d/.test(myString);
-// }
-
 function Searchbar({ setPostcode }) {
   const [input, setInput] = useState("");
   function inputSearch(e) {
-    if (/\d/.test(e.target.value)) {
-      setInput(e.target.value);
+    if (/\d/.test(e.target.value.toLowerCase())) {
+      setInput(e.target.value.toLowerCase());
     } else {
-      setInput("L1 8JQ");
-      // for (let i = 0; i < cities.length; i++)
-      // {
-      //   if (e.target.value === cities[i].Postcode) {
-      //     return setInput(cities[i].Postcode);
-      //   }
-      // }
+      // setInput("L1 8JQ");
+      for (let i = 0; i < cities.length; i++) {
+        if (e.target.value.toLowerCase() === cities[i].city) {
+          setInput(() => cities[i].postcode);
+        }
+      }
     }
     console.log("setPostcode", e.target.value);
   }
