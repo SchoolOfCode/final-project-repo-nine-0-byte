@@ -12,7 +12,7 @@ export default function Header() {
 
   if (error) return <div>{error.message}</div>;
 
-  console.log(user);
+  // console.log(user);
 
   const userLogin = (
     <Menu>
