@@ -22,8 +22,9 @@ export default async function useCallApi(path, type, body){
     let response = [];
     
     try{
+         const req =  `${process.env.NEXT_PUBLIC_API_URL}${path}`
         
-        response = await fetch (`/${path}`,requestOptions).then(res=>res.json())
+        response = await fetch(req).then(res=>res.json())
         // if(!response?.payload || response?.success === false){throw "Failed to get a response from the server"}
     }catch(err){
         response = "error"
