@@ -124,7 +124,7 @@ export default function Filter({
   const filtersSuccess = () => {
     message.success("Your filters have been saved.", 2.2);
   };
-
+// new comment
   return (
     <>
       {hamburger && (
