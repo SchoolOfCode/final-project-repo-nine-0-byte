@@ -13,8 +13,6 @@ import {
 } from "./crudFunctions.js";
 // import { API } from '../../../config.js'
 
-
-
 async function userExists(id) {
   console.log(id);
   const res = await callApi(`users/${id}`);
@@ -24,18 +22,14 @@ async function userExists(id) {
 
 ////////////////////////////////////
 
-export default  function useBackend({ id, name }) {
-  const [user_id, setUser_id] = useState(id);
+export default function useBackend({ user_id, name }) {
+  // const [user_id, setUser_id] = useState(id);
 
-
-
-
-
-// (async ()=>{
-//   if (!(await userExists(user_id))) {
-//     await createUser({ user_id, name });
-//   }
-// })()
+  // (async ()=>{
+  //   if (!(await userExists(user_id))) {
+  //     await createUser({ user_id, name });
+  //   }
+  // })()
 
   const methods = {
     FILTER: "FILTER",
@@ -44,7 +38,6 @@ export default  function useBackend({ id, name }) {
   };
 
   async function addUser(method, controlObject) {
-      
     controlObject = controlObject ?? {};
 
     method = method ?? methods.USERS;
@@ -52,11 +45,12 @@ export default  function useBackend({ id, name }) {
     switch (method) {
       case methods.USERS:
         controlObject.id = user_id;
-        controlObject.username = name
-        console.log("Expecting >> to equal, id and username", controlObject)
+        controlObject.username = name;
+        console.log("Expecting >> to equal, id and username", controlObject);
         await createUser(controlObject);
         break;
       case methods.FILTER:
+        controlObject.user_id = user_id;
         await createFilter(controlObject);
         break;
       case methods.COMMENT:
@@ -85,12 +79,11 @@ export default  function useBackend({ id, name }) {
   }
 
   const deleteUser = async (method, controlObject) => {
-      
     controlObject = controlObject ?? {};
 
     method = method ?? methods.USERS;
 
-    console.log("I'm deleting a ", method )
+    console.log("I'm deleting a ", method);
 
     switch (method) {
       case methods.USERS:
@@ -106,7 +99,7 @@ export default  function useBackend({ id, name }) {
     }
   };
 
-  return {addUser, updateUser, deleteUser, methods};
+  return { addUser, updateUser, deleteUser, methods };
 }
 
 //Add user

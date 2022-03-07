@@ -7,28 +7,30 @@ import Style from "../styles/Home.module.css";
 import Filter from "../components/Filter";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import useBackend from "../utils/hooks/useBackend"
-
+import useBackend from "../utils/hooks/useBackend";
 
 // (async ()=>console.log(await useCallApi()))()
 
 //import Map from "../components/Map";
 
-
-
-
 export default function Home() {
+  const { addUser, deleteUser, updateUser, methods } = useBackend({
+    user_id: "89yr93gf79ft792",
+    name: "Bob",
+  });
 
-  const {addUser, deleteUser} = useBackend({id:"cameldog3", name:"Simon"}) 
-
-
-  deleteUser()
+  useEffect(() => {
+    addUser(methods.FILTER, {
+      price: 0.1,
+      connector_type: ["HELLO"],
+      availability: true,
+    });
+  }, []);
   // addUser("FILTER",{
   //   price : 3,
   //   connector_type : ["testing, am I on heroku?"],
   //   availability : true
   // })
-
 
   let connectorsFilter = [
     "3-pin Type G (BS1363)",
