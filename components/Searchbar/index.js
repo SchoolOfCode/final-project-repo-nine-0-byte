@@ -5,13 +5,30 @@ import { Input, Tooltip } from "antd";
 // import { FilterTwoTone } from "@ant-design/icons";
 import { FcFilledFilter, FcSearch } from "react-icons/fc";
 import Filter from "../Filter";
+import cities from "../../utils/dummy-data/cities";
+
+//Check if the input includes number
+//if yes carry on with the existing logic
+//else we have to map through cities array and find the matching cities
+//return the postcode
+//use setInput with the returned postcode
 
 function Searchbar({ setPostcode }) {
   const [input, setInput] = useState("");
   function inputSearch(e) {
-    setInput(e.target.value);
+    if (/\d/.test(e.target.value.toLowerCase())) {
+      setInput(e.target.value.toLowerCase());
+    } else {
+      // setInput("L1 8JQ");
+      for (let i = 0; i < cities.length; i++) {
+        if (e.target.value.toLowerCase() === cities[i].city) {
+          setInput(() => cities[i].postcode);
+        }
+      }
+    }
     console.log("setPostcode", e.target.value);
   }
+  console.log("London Flag", input);
   return (
     <form
       onSubmit={(e) => {
