@@ -16,7 +16,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
-    "react-leaflet": "^3.2.5"
+    "react-leaflet": "^3.2.5",
+    "react-leaflet-fullscreen": "^2.0.2"
   },
   "devDependencies": {
     "cypress": "^9.5.1",

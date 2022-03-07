@@ -5,7 +5,6 @@ import useGetCoordsFromPostcode from "../utils/hooks/useGetCoordsFromPostcode";
 import { useState, useEffect } from "react";
 import Style from "../styles/Home.module.css";
 import Filter from "../components/Filter";
-import dummyData from "../utils/dummy-data";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 

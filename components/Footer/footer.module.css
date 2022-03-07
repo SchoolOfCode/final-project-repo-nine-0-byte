@@ -1,19 +1,21 @@
 .Foot {
   width: 100%;
+  /* height: auto; */
   display: flex;
   justify-content: center;
   background-color: var(--main-brand-color);
   color: var(--light-accent);
-  position: absolute;
-  bottom: 0;
-  z-index: 0;
-  /* margin-top: 2em; */
+  position: static;
+  
+}
+.Foot .container{
+  margin-bottom: 0;
+  padding-bottom: -1rem;
 }
 
 .Foot a {
   text-decoration: none;
   padding-left: 0.5em;
-  padding-right: 0.5em;
   color: var(--light-accent);
 }
 
@@ -34,6 +36,15 @@
 
 .copyright {
   display: flex;
+}
+
+.nextIcon {
+  margin: 0 0.3rem;
+  animation: spin 2.2s infinite linear;
+}
+@keyframes spin {
+  from{transform: rotate(0deg);}
+  to{transform: rotate(360deg);}
 }
 
 /*

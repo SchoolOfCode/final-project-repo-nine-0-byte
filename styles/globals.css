@@ -41,7 +41,13 @@
 
 .leaflet-container {
   width: 100%;
-  height: 75vh;
+  height: 80vh;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 912px) {
+  .leaflet-container {
+    height: 88vh;
+  }
 }
 
 /* Colour scheme alternate formats below */

@@ -1,4 +1,4 @@
-import { Switch, Slider, Dropdown, Menu, Button, message } from "antd";
+import { Tooltip, Slider, Dropdown, Menu, Button, message } from "antd";
 import {
   DownOutlined,
   MenuOutlined,
@@ -121,12 +121,18 @@ export default function Filter({
     0.5: "£0.50",
   };
 
+  const filtersSuccess = () => {
+    message.success("Your filters have been saved.", 2.2);
+  };
+
   return (
     <>
       {hamburger && (
-        <button className={Style.burgerMenu} onClick={handleHamburger}>
-          <MenuOutlined />
-        </button>
+        <Tooltip title="Filters">
+          <button className={Style.burgerMenu} onClick={handleHamburger}>
+            <MenuOutlined />
+          </button>
+        </Tooltip>
       )}
 
       {!hamburger && (
@@ -174,6 +180,7 @@ export default function Filter({
               onClick={(e) => {
                 e.preventDefault();
                 console.log(handleSaveFilters());
+                filtersSuccess();
               }}
             >
               Save Filters
