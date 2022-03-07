@@ -20,13 +20,15 @@ import useBackend from "../utils/hooks/useBackend"
 
 export default function Home() {
 
-  const [deleteUser] = useBackend({id:"89yr9wergert792", name:"I LIVE TO DIE"})
+  const {addUser, deleteUser} = useBackend({id:"cameldog3", name:"Simon"}) 
 
-  addUser("FILTER",{
-    price : 3,
-    connector_type : ["testing, am I on heroku?"],
-    availability : true
-  })
+
+  deleteUser()
+  // addUser("FILTER",{
+  //   price : 3,
+  //   connector_type : ["testing, am I on heroku?"],
+  //   availability : true
+  // })
 
 
   let connectorsFilter = [
