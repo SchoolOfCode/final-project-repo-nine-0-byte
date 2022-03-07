@@ -6,6 +6,7 @@ import { Input, Tooltip } from "antd";
 import { FcFilledFilter, FcSearch } from "react-icons/fc";
 import Filter from "../Filter";
 import cities from "../../utils/dummy-data/cities";
+import {handleFilterMenu} from "../../pages/index.js"
 
 //Check if the input includes number
 //if yes carry on with the existing logic
@@ -13,7 +14,7 @@ import cities from "../../utils/dummy-data/cities";
 //return the postcode
 //use setInput with the returned postcode
 
-function Searchbar({ setPostcode }) {
+function Searchbar({ setPostcode, filterMenu, handleFilterMenu }) {
   const [input, setInput] = useState("");
   function inputSearch(e) {
     if (/\d/.test(e.target.value.toLowerCase())) {
@@ -46,7 +47,7 @@ function Searchbar({ setPostcode }) {
             <FcFilledFilter
               size="1.5rem"
               style={{ color: "green" }}
-              onClick={() => console.log("click the Tooltip")}
+              onClick={ (e)=> {e.preventDefault(); handleFilterMenu()}}
             />
           </Tooltip>
         }
@@ -70,4 +71,12 @@ then converts it into lat&long
 use dummy data to test states
 switch dummy data with fetch command 
 test that's working correctly 
+*/
+
+/*
+make a filter state in home/index
+make a handle filter function in home/index
+pass the state to map component
+
+inside map component, pass the prop to searchbar component
 */
