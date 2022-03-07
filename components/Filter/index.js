@@ -139,7 +139,7 @@ export default function Filter({
       {filterMenu && (
         <form className={Style.filterContainer}>
           <div className={Style.closeBtn}>
-            <p>Filter:</p>
+            <h3 className={Style.filterHeader}>Filter:</h3>
             <CloseSquareTwoTone
               style={{ marginTop: "-1rem" }}
               // onClick={() => {
