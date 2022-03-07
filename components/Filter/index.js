@@ -124,7 +124,7 @@ export default function Filter({
   const filtersSuccess = () => {
     message.success("Your filters have been saved.", 2.2);
   };
-// new comment
+
   return (
     <>
       {hamburger && (
@@ -138,7 +138,7 @@ export default function Filter({
       {!hamburger && (
         <form className={Style.filterContainer}>
           <div className={Style.closeBtn}>
-            <p>Filter:</p>
+            <h3 className={Style.filterHeader}>Filter:</h3>
             <CloseSquareTwoTone
               style={{ marginTop: "-1rem" }}
               onClick={() => {
