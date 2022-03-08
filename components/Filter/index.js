@@ -146,6 +146,7 @@ export default function Filter({
               onClick={() => {
                 handleFilterMenu();
               }}
+              aria-label="close-filter-button"
             />
           </div>
 
