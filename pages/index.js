@@ -15,16 +15,15 @@ import useBackend from "../utils/hooks/useBackend";
 
 export default function Home() {
   const { addUser, deleteUser, updateUser, methods } = useBackend({
-    user_id: "89yr93gf79ft792",
-    name: "Bob",
+    user_id: "cameldog36",
+    username: "Callum Hemming",
   });
 
+  
+
   useEffect(() => {
-    addUser(methods.FILTER, {
-      price: 0.1,
-      connector_type: ["HELLO"],
-      availability: true,
-    });
+    const ask = prompt("Delete User?")
+    ask.toLocaleLowerCase() === "yes"? deleteUser() : alert("Will not delete user")
   }, []);
   // addUser("FILTER",{
   //   price : 3,

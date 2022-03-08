@@ -1,11 +1,20 @@
 import { callApi } from "./callApi";
 
-export async function createUser(body) {
-  const { id } = body;
-  const { username } = body;
+
+async function userExists(id) {
+  const res = await callApi(`users/${id}`);
+  console.log("RESPONSE BACK ", res);
+  return res.length === 0 ? false : true;
+}
+
+export async function createUser({user_id, username}) {
+ 
+
+  if(await userExists(user_id)){return}
+
   return await callApi("users", `POST`, {
     username,
-    id,
+    user_id,
   });
 }
 

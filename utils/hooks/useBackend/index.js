@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { callApi } from "./callApi.js";
 import {
   createComment,
@@ -13,23 +13,19 @@ import {
 } from "./crudFunctions.js";
 // import { API } from '../../../config.js'
 
-async function userExists(id) {
-  console.log(id);
-  const res = await callApi(`users/${id}`);
-  console.log("RESPONSE BACK ", res);
-  return res.length === 0 ? false : true;
-}
+
 
 ////////////////////////////////////
 
-export default function useBackend({ user_id, name }) {
-  // const [user_id, setUser_id] = useState(id);
+export default function useBackend({ user_id, username }) {
 
-  // (async ()=>{
-  //   if (!(await userExists(user_id))) {
-  //     await createUser({ user_id, name });
-  //   }
-  // })()
+  useEffect(()=>{
+    (async()=>{
+      createUser({user_id, username})
+    })()
+  },[])
+
+
 
   const methods = {
     FILTER: "FILTER",
@@ -44,8 +40,8 @@ export default function useBackend({ user_id, name }) {
 
     switch (method) {
       case methods.USERS:
-        controlObject.id = user_id;
-        controlObject.username = name;
+        controlObject.user_id = user_id;
+        controlObject.username = username;
         console.log("Expecting >> to equal, id and username", controlObject);
         await createUser(controlObject);
         break;
