@@ -1,16 +1,15 @@
 import { callApi } from "./callApi";
 
-
 async function userExists(id) {
   const res = await callApi(`users/${id}`);
   console.log("RESPONSE BACK ", res);
   return res.length === 0 ? false : true;
 }
 
-export async function createUser({user_id, username}) {
- 
-
-  if(await userExists(user_id)){return}
+export async function createUser({ user_id, username }) {
+  if (await userExists(user_id)) {
+    return;
+  }
 
   return await callApi("users", `POST`, {
     username,
@@ -93,4 +92,23 @@ export async function deleteFilter(filterId) {
 export async function deleteComment(commentId) {
   const { comment_id } = commentId;
   return await callApi(`comments/${comment_id}`, "DELETE");
+}
+
+export async function getUserName({ user_id }) {
+  return await callApi(`users/${user_id}`, "GET");
+}
+
+export async function getFilter({ user_id }) {
+  console.log("GetFilter is running with ", user_id);
+  return await callApi(`filters/${user_id}`, "GET");
+}
+
+// export async function getAllFilters({user_id}) {
+//   const { filter_id } = filterId;
+//   return await callApi(`filters/${filter_id}`, "GET");
+// }
+
+export async function getComment(commentId) {
+  const { comment_id } = commentId;
+  return await callApi(`comments/${comment_id}`, "GET");
 }

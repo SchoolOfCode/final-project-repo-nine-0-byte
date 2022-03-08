@@ -8,25 +8,22 @@ import Filter from "../components/Filter";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import useBackend from "../utils/hooks/useBackend";
+import { useUser } from "@auth0/nextjs-auth0";
 
 // (async ()=>console.log(await useCallApi()))()
 
 //import Map from "../components/Map";
 
 export default function Home() {
-  const { addUser, deleteUser, updateUser, methods } = useBackend({
-    user_id: "cameldog36",
-    username: "Callum Hemming",
-  });
-
-  
-
-
-  // addUser("FILTER",{
-  //   price : 3,
-  //   connector_type : ["testing, am I on heroku?"],
-  //   availability : true
-  // })
+  const { user } = useUser();
+  const { addUser, deleteUser, updateUser, getUser, methods } = useBackend(
+    user
+      ? {
+          user_id: user.sub,
+          username: user.name,
+        }
+      : {}
+  );
 
   let connectorsFilter = [
     "3-pin Type G (BS1363)",
@@ -76,13 +73,37 @@ export default function Home() {
 
   function handleSaveFilters() {
     const savedFilters = {};
-    // savedFilters.userId = "";
     savedFilters.price = price;
-    savedFilters.connectorType = [...filteredMarkers];
+    savedFilters.connector_type = [...filteredMarkers];
+    console.log("savedconnectors", savedFilters.connector_type);
     savedFilters.availability = isAvailable;
 
     return savedFilters;
   }
+
+  useEffect(() => {
+    console.log("User is ", user);
+    if (!user) {
+      return;
+    } else {
+      (async () => {
+        const listOfFilters = await getUser(methods.FILTER);
+        if (listOfFilters.length === 0) {
+          return;
+        }
+        const latestFilter = listOfFilters[listOfFilters.length - 1];
+        console.log("All filters :", listOfFilters);
+        console.log("Latest filter is:", latestFilter);
+        setFilteredMarkers(() => latestFilter.connector_type);
+        console.log("connector type ", latestFilter.connector_type);
+        console.log("Filteredmarkers ", filteredMarkers);
+        setPrice(() => latestFilter.price);
+        console.log("Price state ", price);
+        setIsAvailable(() => latestFilter.availability);
+        console.log("isAvailable  ", isAvailable);
+      })();
+    }
+  }, [user]);
 
   // useEffect(() => {
   //   if (pointsNearby) {
@@ -120,7 +141,7 @@ export default function Home() {
   // }, [filteredMarkers, price, isAvailable]);
 
   const antIcon = <LoadingOutlined style={{ fontSize: 56 }} spin />;
-
+  console.log("visible markers:", markersOn);
   return (
     <div className={Style.container}>
       {isLoading && (
@@ -137,6 +158,10 @@ export default function Home() {
             handleAvail={handleAvail}
             isAvailable={isAvailable}
             handleSaveFilters={handleSaveFilters}
+            price={price}
+            addUser={addUser}
+            user={user}
+            methods={methods}
           />
 
           <Map

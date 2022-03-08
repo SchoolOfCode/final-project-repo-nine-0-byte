@@ -10,22 +10,20 @@ import {
   deleteComment,
   deleteFilter,
   deleteUserName,
+  getFilter,
+  getComment,
+  getUserName,
 } from "./crudFunctions.js";
 // import { API } from '../../../config.js'
-
-
 
 ////////////////////////////////////
 
 export default function useBackend({ user_id, username }) {
-
-  useEffect(()=>{
-    (async()=>{
-      createUser({user_id, username})
-    })()
-  },[])
-
-
+  useEffect(() => {
+    (async () => {
+      createUser({ user_id, username });
+    })();
+  }, []);
 
   const methods = {
     FILTER: "FILTER",
@@ -95,7 +93,29 @@ export default function useBackend({ user_id, username }) {
     }
   };
 
-  return { addUser, updateUser, deleteUser, methods };
+  async function getUser(method, controlObject) {
+    controlObject = controlObject ?? {};
+
+    method = method ?? methods.USERS;
+
+    switch (method) {
+      case methods.USERS:
+        controlObject.user_id = user_id;
+        controlObject.username = username;
+        console.log("Expecting >> to equal, id and username", controlObject);
+        await getUserName(controlObject);
+        break;
+      case methods.FILTER:
+        controlObject.user_id = user_id;
+        return await getFilter(controlObject);
+      //break;
+      case methods.COMMENT:
+        await getComment(controlObject);
+        break;
+    }
+  }
+
+  return { addUser, updateUser, deleteUser, getUser, methods };
 }
 
 //Add user
