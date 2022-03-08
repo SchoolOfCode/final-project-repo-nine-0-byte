@@ -42,6 +42,7 @@ function Searchbar({ setPostcode, handleFilterMenu }) {
         placeholder="Search a new location"
         autoFocus
         className={Style.searchInput}
+        aria-label="search-input"
         prefix={
           <Tooltip title={"Click to open filters"}>
             <FcFilledFilter
@@ -51,6 +52,7 @@ function Searchbar({ setPostcode, handleFilterMenu }) {
                 e.preventDefault();
                 handleFilterMenu();
               }}
+              aria-label="filter-button"
             />
           </Tooltip>
         }

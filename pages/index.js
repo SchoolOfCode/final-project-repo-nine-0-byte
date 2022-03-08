@@ -7,10 +7,9 @@ import Style from "../styles/Home.module.css";
 import Filter from "../components/Filter";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import Head from "next/head";
 import useBackend from "../utils/hooks/useBackend";
 import { useUser } from "@auth0/nextjs-auth0";
-
-// (async ()=>console.log(await useCallApi()))()
 
 //import Map from "../components/Map";
 
@@ -148,13 +147,19 @@ export default function Home() {
   const antIcon = <LoadingOutlined style={{ fontSize: 56 }} spin />;
   console.log("visible markers:", markersOn);
   return (
-    <div className={Style.container}>
-      {isLoading && (
-        <div className={Style.loader}>
-          <Spin alt="loading-circle" indicator={antIcon} />
-          <h1>Loading...</h1>
-        </div>
-      )}
+    <>
+      <Head>
+        <title>Short Circuit</title>
+        <meta name="keywords" content="shortcircuit" />{" "}
+      </Head>
+      <div className={Style.container}>
+        {isLoading && (
+          <div className={Style.loader}>
+            <Spin alt="loading-circle" indicator={antIcon} />
+            <h1>Loading...</h1>
+          </div>
+        )}
+        
       {!isLoading && (
         <>
           <Filter
@@ -170,18 +175,18 @@ export default function Home() {
             filterMenu={filterMenu}
             handleFilterMenu={handleFilterMenu}
           />
-
-          <Map
-            location={location}
-            setLocation={setLocation}
-            setPostcode={setPostcode}
-            pointsNearby={markersOn}
-            filterMenu={filterMenu}
-            handleFilterMenu={handleFilterMenu}
-          />
-        </>
-      )}
-    </div>
+            <Map
+              location={location}
+              setLocation={setLocation}
+              setPostcode={setPostcode}
+              pointsNearby={markersOn}
+              filterMenu={filterMenu}
+              handleFilterMenu={handleFilterMenu}
+            />
+          </>
+        )}
+      </div>
+    </>
   );
 }
 
