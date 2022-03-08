@@ -21,6 +21,7 @@ export default function Filter({
   user,
   methods,
   filterMenu,
+  handleFilterMenu,
 }) {
 
   function handleMenuClick(e) {
@@ -139,9 +140,9 @@ export default function Filter({
             <h3 className={Style.filterHeader}>Filter:</h3>
             <CloseSquareTwoTone
               style={{ marginTop: "-1rem" }}
-              // onClick={() => {
-              //   setHamburger(true);
-              // }}
+              onClick={() => {
+                handleFilterMenu();
+              }}
             />
           </div>
 

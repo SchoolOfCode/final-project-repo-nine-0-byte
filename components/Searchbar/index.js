@@ -6,7 +6,7 @@ import { Input, Tooltip } from "antd";
 import { FcFilledFilter, FcSearch } from "react-icons/fc";
 import Filter from "../Filter";
 import cities from "../../utils/dummy-data/cities";
-import {handleFilterMenu} from "../../pages/index.js"
+import { handleFilterMenu } from "../../pages/index.js";
 
 //Check if the input includes number
 //if yes carry on with the existing logic
@@ -14,7 +14,7 @@ import {handleFilterMenu} from "../../pages/index.js"
 //return the postcode
 //use setInput with the returned postcode
 
-function Searchbar({ setPostcode, filterMenu, handleFilterMenu }) {
+function Searchbar({ setPostcode, handleFilterMenu }) {
   const [input, setInput] = useState("");
   function inputSearch(e) {
     if (/\d/.test(e.target.value.toLowerCase())) {
@@ -29,7 +29,7 @@ function Searchbar({ setPostcode, filterMenu, handleFilterMenu }) {
     }
     console.log("setPostcode", e.target.value);
   }
-  console.log("London Flag", input);
+
   return (
     <form
       onSubmit={(e) => {
@@ -47,7 +47,10 @@ function Searchbar({ setPostcode, filterMenu, handleFilterMenu }) {
             <FcFilledFilter
               size="1.5rem"
               style={{ color: "green" }}
-              onClick={ (e)=> {e.preventDefault(); handleFilterMenu()}}
+              onClick={(e) => {
+                e.preventDefault();
+                handleFilterMenu();
+              }}
             />
           </Tooltip>
         }

@@ -51,8 +51,6 @@ export default function Home() {
     setFilterMenu(!filterMenu);
   }
 
-  console.log("filter state", filterMenu);
-
   function handleFilter(connectorType) {
     if (filteredMarkers.includes(connectorType)) {
       let index = filteredMarkers.indexOf(connectorType);
@@ -170,6 +168,7 @@ export default function Home() {
             user={user}
             methods={methods}
             filterMenu={filterMenu}
+            handleFilterMenu={handleFilterMenu}
           />
 
           <Map
