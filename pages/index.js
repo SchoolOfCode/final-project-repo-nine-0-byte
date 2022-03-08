@@ -11,6 +11,9 @@ import Head from "next/head";
 
 //import Map from "../components/Map";
 
+
+export const savedFilters = {};
+
 export default function Home() {
   let connectorsFilter = [
     "3-pin Type G (BS1363)",
@@ -64,8 +67,7 @@ export default function Home() {
   }
 
   function handleSaveFilters() {
-    const savedFilters = {};
-    // savedFilters.userId = "";
+    // const savedFilters = {};
     savedFilters.price = price;
     savedFilters.connectorType = [...filteredMarkers];
     savedFilters.availability = isAvailable;
