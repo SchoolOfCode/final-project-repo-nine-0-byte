@@ -46,6 +46,13 @@ export default function Home() {
   const [price, setPrice] = useState(0.45);
   const [isAvailable, setIsAvailable] = useState(false);
 
+  const [filterMenu, setFilterMenu] = useState(false);
+  function handleFilterMenu() {
+    setFilterMenu(!filterMenu);
+  }
+
+  console.log("filter state", filterMenu);
+
   function handleFilter(connectorType) {
     if (filteredMarkers.includes(connectorType)) {
       let index = filteredMarkers.indexOf(connectorType);
@@ -162,6 +169,7 @@ export default function Home() {
             addUser={addUser}
             user={user}
             methods={methods}
+            filterMenu={filterMenu}
           />
 
           <Map
@@ -169,6 +177,8 @@ export default function Home() {
             setLocation={setLocation}
             setPostcode={setPostcode}
             pointsNearby={markersOn}
+            filterMenu={filterMenu}
+            handleFilterMenu={handleFilterMenu}
           />
         </>
       )}
@@ -176,4 +186,4 @@ export default function Home() {
   );
 }
 
-//Dev 9.0 !!
+//Dev 9.0.byte :D!!

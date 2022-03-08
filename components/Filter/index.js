@@ -20,12 +20,8 @@ export default function Filter({
   addUser,
   user,
   methods,
+  filterMenu,
 }) {
-  const [hamburger, setHamburger] = useState(true);
-
-  function handleHamburger() {
-    setHamburger(!hamburger);
-  }
 
   function handleMenuClick(e) {
     message.info("Click on menu item.");
@@ -129,23 +125,23 @@ export default function Filter({
 
   return (
     <>
-      {hamburger && (
+      {/* {hamburger && (
         <Tooltip title="Filters">
           <button className={Style.burgerMenu} onClick={handleHamburger}>
             <MenuOutlined />
           </button>
         </Tooltip>
-      )}
+      )} */}
 
-      {!hamburger && (
+      {filterMenu && (
         <form className={Style.filterContainer}>
           <div className={Style.closeBtn}>
-            <p>Filter:</p>
+            <h3 className={Style.filterHeader}>Filter:</h3>
             <CloseSquareTwoTone
               style={{ marginTop: "-1rem" }}
-              onClick={() => {
-                setHamburger(true);
-              }}
+              // onClick={() => {
+              //   setHamburger(true);
+              // }}
             />
           </div>
 

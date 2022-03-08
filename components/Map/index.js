@@ -34,6 +34,8 @@ export default function Map({
   location,
   pointsNearby,
   setLocation,
+  filterMenu,
+  handleFilterMenu,
   // searchSubmit,
   setPostcode,
 }) {
@@ -49,6 +51,8 @@ export default function Map({
           setLocation={setLocation}
           // searchSubmit={searchSubmit}
           setPostcode={setPostcode}
+          filterMenu={filterMenu}
+          handleFilterMenu={handleFilterMenu}
         />
       </div>
       <div className={Style.mapContainer}>
