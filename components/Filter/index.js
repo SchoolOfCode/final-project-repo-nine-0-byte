@@ -7,8 +7,8 @@ import {
 
 import Style from "./Filter.module.css";
 import { useState } from "react";
-import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
+import useBackend from "../../utils/hooks/useBackend";
 
 export default function Filter({
   handleFilter,
@@ -16,15 +16,12 @@ export default function Filter({
   handleAvail,
   isAvailable,
   handleSaveFilters,
+  price,
+  addUser,
+  user,
+  methods,
   filterMenu,
 }) {
-  const { user } = useUser();
-
-  // const [hamburger, setHamburger] = useState(true);
-
-  // export function handleHamburger() {
-  //   setHamburger(!hamburger);
-  // }
 
   function handleMenuClick(e) {
     message.info("Click on menu item.");
@@ -154,7 +151,7 @@ export default function Filter({
             className={Style.slider}
             min={0}
             max={0.5}
-            defaultValue={0.45}
+            defaultValue={price}
             step={0.05}
             onAfterChange={handlePrice}
           />
@@ -178,9 +175,9 @@ export default function Filter({
 
           {user ? (
             <button
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault();
-                console.log(handleSaveFilters());
+                addUser(methods.FILTER, handleSaveFilters());
                 filtersSuccess();
               }}
             >
