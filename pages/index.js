@@ -21,10 +21,7 @@ export default function Home() {
 
   
 
-  useEffect(() => {
-    const ask = prompt("Delete User?")
-    ask.toLocaleLowerCase() === "yes"? deleteUser() : alert("Will not delete user")
-  }, []);
+
   // addUser("FILTER",{
   //   price : 3,
   //   connector_type : ["testing, am I on heroku?"],
