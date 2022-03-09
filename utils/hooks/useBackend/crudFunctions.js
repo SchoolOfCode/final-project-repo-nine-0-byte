@@ -19,6 +19,7 @@ export async function createUser({ user_id, username }) {
 
 export async function createFilter(body) {
   console.log("This is the body :)", body);
+  const {filter_name} = body
   const { user_id } = body;
   const { price } = body;
   const { connector_type } = body;
@@ -28,6 +29,7 @@ export async function createFilter(body) {
     price,
     connector_type,
     availability,
+    filter_name
   });
 }
 
@@ -69,14 +71,19 @@ export async function updateUserName(updatedObject) {
 }
 
 export async function updateFilter(updatedObject) {
+  const {filter_id} = updatedObject
+  const {user_id} = updatedObject
   const { price } = updatedObject;
   const { connector_type } = updatedObject;
   const { availability } = updatedObject;
+  const {filter_name} = updatedObject;
 
-  return await callApi(`filters/${user_id}`, "PUT", {
+  return await callApi(`filters/${filter_id}`, "PUT", {
     price,
     connector_type,
     availability,
+    filter_name,
+    user_id
   });
 }
 

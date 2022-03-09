@@ -80,8 +80,9 @@ export default function Home() {
   function handleSaveFilters() {
     const newFilterObject = {
       price: price,
-      connectorType: [...filteredMarkers],
+      connector_type: [...filteredMarkers],
       availability: isAvailable,
+      filter_name: "User Created Filter"
     };
     return savedFilters.push(newFilterObject);
   }
@@ -133,7 +134,7 @@ export default function Home() {
         }
       } else {
         if (
-          filteredMarkers.includes(point.Connectors[i].ConnectorType) &&
+          filteredMarkers?.includes(point.Connectors[i].ConnectorType) &&
           numPrice <= price
         ) {
           return true;
@@ -162,7 +163,6 @@ export default function Home() {
             <h1>Loading...</h1>
           </div>
         )}
-
         {!isLoading && (
           <>
             <Filter
@@ -173,6 +173,7 @@ export default function Home() {
               handleSaveFilters={handleSaveFilters}
               price={price}
               addUser={addUser}
+              updateUser={updateUser}
               user={user}
               methods={methods}
               filterMenu={filterMenu}
