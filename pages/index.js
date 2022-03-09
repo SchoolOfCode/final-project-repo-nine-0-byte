@@ -162,22 +162,24 @@ export default function Home() {
             <h1>Loading...</h1>
           </div>
         )}
-        
-      {!isLoading && (
-        <>
-          <Filter
-            handleFilter={handleFilter}
-            handlePrice={handlePrice}
-            handleAvail={handleAvail}
-            isAvailable={isAvailable}
-            handleSaveFilters={handleSaveFilters}
-            price={price}
-            addUser={addUser}
-            user={user}
-            methods={methods}
-            filterMenu={filterMenu}
-            handleFilterMenu={handleFilterMenu}
-          />
+
+        {!isLoading && (
+          <>
+            <Filter
+              handleFilter={handleFilter}
+              handlePrice={handlePrice}
+              handleAvail={handleAvail}
+              isAvailable={isAvailable}
+              handleSaveFilters={handleSaveFilters}
+              price={price}
+              addUser={addUser}
+              user={user}
+              methods={methods}
+              filterMenu={filterMenu}
+              handleFilterMenu={handleFilterMenu}
+              filteredMarkers={filteredMarkers}
+              connectorsFilter={connectorsFilter}
+            />
             <Map
               location={location}
               setLocation={setLocation}
