@@ -83,8 +83,10 @@ export default function Home() {
       connector_type: [...filteredMarkers],
       availability: isAvailable,
       filter_name: "User Created Filter"
+      
     };
-    return savedFilters.push(newFilterObject);
+    savedFilters.push(newFilterObject);
+    return newFilterObject
   }
   //save savedFilter as spread array instead of an object
   //then map over in the Drawers.js component
@@ -116,7 +118,7 @@ export default function Home() {
   // useEffect(() => {
   //   if (pointsNearby) {
   //     setMarkersOn(
-  const markersOn = pointsNearby.filter((point) => {
+  const markersOn = pointsNearby?.filter((point) => {
     const numPrice =
       point.Price === "Free"
         ? 0

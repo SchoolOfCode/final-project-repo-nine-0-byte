@@ -31,6 +31,8 @@ export default function useBackend({ user_id, username }) {
     USERS: "USERS",
   };
 
+  user_id = user_id ?? "test"
+
   async function addUser(method, controlObject) {
     controlObject = controlObject ?? {};
 

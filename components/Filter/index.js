@@ -48,7 +48,7 @@ export default function Filter({
               {connector}
               <input
                 type="checkbox"
-                defaultChecked={filteredMarkers.includes(connector)}
+                defaultChecked={filteredMarkers?.includes(connector)}
                 onClick={() => handleFilter(connector)}
               />
             </label>
