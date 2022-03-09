@@ -32,6 +32,7 @@ const Drawers = ({ visible, onClose }) => {
                 <button>Go to your filter</button>
               </Panel>
             ))}
+
           {/* <Panel header="This is panel header 2" key="2">
        <p>{text}</p>
      </Panel>
