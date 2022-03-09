@@ -11,8 +11,7 @@ import Head from "next/head";
 
 //import Map from "../components/Map";
 
-
-export const savedFilters = {};
+export let savedFilters = [];
 
 export default function Home() {
   let connectorsFilter = [
@@ -67,13 +66,15 @@ export default function Home() {
   }
 
   function handleSaveFilters() {
-    // const savedFilters = {};
-    savedFilters.price = price;
-    savedFilters.connectorType = [...filteredMarkers];
-    savedFilters.availability = isAvailable;
-
-    return savedFilters;
+    const newFilterObject = {
+      price: price,
+      connectorType: [...filteredMarkers],
+      availability: isAvailable,
+    };
+    return savedFilters.push(newFilterObject);
   }
+  //save savedFilter as spread array instead of an object
+  //then map over in the Drawers.js component
 
   // useEffect(() => {
   //   if (pointsNearby) {

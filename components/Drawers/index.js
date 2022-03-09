@@ -1,4 +1,3 @@
-import useGeoLocation from "../../utils/hooks/useGeoLocation.js";
 import { Drawer, Collapse } from "antd";
 import { savedFilters } from "../../pages/index.js";
 
@@ -8,9 +7,6 @@ function callback(key) {
 }
 
 const Drawers = ({ visible, onClose }) => {
-  const [location] = useGeoLocation();
-
-  console.log(location);
   return (
     <>
       <Drawer
@@ -19,23 +15,23 @@ const Drawers = ({ visible, onClose }) => {
         onClose={() => onClose()}
         visible={visible}
       >
-        <Collapse defaultActiveKey={["1"]} onChange={callback}>
-          {savedFilters && (
-            <Panel header="Filter 1" key="1">
-              <p>Location: {location}</p>
-              <p>Price: {savedFilters.price}</p>
-              <p>
-                Connectors Type:{" "}
-                {savedFilters?.connectorType?.map((item, i) => (
-                  <ul key={i}>
-                    <li>{item}</li>
-                  </ul>
-                ))}
-              </p>
-              <p>Availability: {JSON.stringify(savedFilters.availability)}</p>
-              <button>Go to your filter</button>
-            </Panel>
-          )}
+        <Collapse onChange={callback}>
+          {savedFilters &&
+            savedFilters.map((filter, i) => (
+              <Panel header={`Filter ${i + 1}`} key={i + 1}>
+                <p>Price: {filter.price}</p>
+                <p>
+                  Connectors Type:{" "}
+                  {filter.connectorType?.map((item, i) => (
+                    <ul key={i}>
+                      <li>{item}</li>
+                    </ul>
+                  ))}
+                </p>
+                <p>Availability: {JSON.stringify(filter.availability)}</p>
+                <button>Go to your filter</button>
+              </Panel>
+            ))}
           {/* <Panel header="This is panel header 2" key="2">
        <p>{text}</p>
      </Panel>
