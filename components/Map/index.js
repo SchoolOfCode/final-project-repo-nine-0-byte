@@ -49,9 +49,7 @@ export default function Map({
       <div className={Style.searchOverlay}>
         <Searchbar
           setLocation={setLocation}
-          // searchSubmit={searchSubmit}
           setPostcode={setPostcode}
-          filterMenu={filterMenu}
           handleFilterMenu={handleFilterMenu}
         />
       </div>

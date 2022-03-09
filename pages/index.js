@@ -7,10 +7,25 @@ import Style from "../styles/Home.module.css";
 import Filter from "../components/Filter";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import Head from "next/head";
+import useBackend from "../utils/hooks/useBackend";
+import { useUser } from "@auth0/nextjs-auth0";
 
 //import Map from "../components/Map";
 
+export let savedFilters = [];
+
 export default function Home() {
+  const { user } = useUser();
+  const { addUser, deleteUser, updateUser, getUser, methods } = useBackend(
+    user
+      ? {
+          user_id: user.sub,
+          username: user.name,
+        }
+      : {}
+  );
+
   let connectorsFilter = [
     "3-pin Type G (BS1363)",
     "JEVS G105 (CHAdeMO) DC",
@@ -36,8 +51,6 @@ export default function Home() {
   function handleFilterMenu() {
     setFilterMenu(!filterMenu);
   }
-  
-console.log("filter state", filterMenu)
 
   function handleFilter(connectorType) {
     if (filteredMarkers.includes(connectorType)) {
@@ -65,19 +78,47 @@ console.log("filter state", filterMenu)
   }
 
   function handleSaveFilters() {
-    const savedFilters = {};
-    // savedFilters.userId = "";
-    savedFilters.price = price;
-    savedFilters.connectorType = [...filteredMarkers];
-    savedFilters.availability = isAvailable;
-
-    return savedFilters;
+    const newFilterObject = {
+      price: price,
+      connector_type: [...filteredMarkers],
+      availability: isAvailable,
+      filter_name: "User Created Filter"
+      
+    };
+    savedFilters.push(newFilterObject);
+    return newFilterObject
   }
+  //save savedFilter as spread array instead of an object
+  //then map over in the Drawers.js component
+
+  useEffect(() => {
+    console.log("User is ", user);
+    if (!user) {
+      return;
+    } else {
+      (async () => {
+        const listOfFilters = await getUser(methods.FILTER);
+        if (listOfFilters.length === 0) {
+          return;
+        }
+        const latestFilter = listOfFilters[listOfFilters.length - 1];
+        console.log("All filters :", listOfFilters);
+        console.log("Latest filter is:", latestFilter);
+        setFilteredMarkers(() => latestFilter.connector_type);
+        console.log("connector type ", latestFilter.connector_type);
+        console.log("Filteredmarkers ", filteredMarkers);
+        setPrice(() => latestFilter.price);
+        console.log("Price state ", price);
+        setIsAvailable(() => latestFilter.availability);
+        console.log("isAvailable  ", isAvailable);
+      })();
+    }
+  }, [user]);
 
   // useEffect(() => {
   //   if (pointsNearby) {
   //     setMarkersOn(
-  const markersOn = pointsNearby.filter((point) => {
+  const markersOn = pointsNearby?.filter((point) => {
     const numPrice =
       point.Price === "Free"
         ? 0
@@ -95,7 +136,7 @@ console.log("filter state", filterMenu)
         }
       } else {
         if (
-          filteredMarkers.includes(point.Connectors[i].ConnectorType) &&
+          filteredMarkers?.includes(point.Connectors[i].ConnectorType) &&
           numPrice <= price
         ) {
           return true;
@@ -110,38 +151,51 @@ console.log("filter state", filterMenu)
   // }, [filteredMarkers, price, isAvailable]);
 
   const antIcon = <LoadingOutlined style={{ fontSize: 56 }} spin />;
-
+  console.log("visible markers:", markersOn);
   return (
-    <div className={Style.container}>
-      {isLoading && (
-        <div className={Style.loader}>
-          <Spin alt="loading-circle" indicator={antIcon} />
-          <h1>Loading...</h1>
-        </div>
-      )}
-      {!isLoading && (
-        <>
-          <Filter
-            handleFilter={handleFilter}
-            handlePrice={handlePrice}
-            handleAvail={handleAvail}
-            isAvailable={isAvailable}
-            handleSaveFilters={handleSaveFilters}
-            filterMenu={filterMenu}
-          />
-
-          <Map
-            location={location}
-            setLocation={setLocation}
-            setPostcode={setPostcode}
-            pointsNearby={markersOn}
-            filterMenu={filterMenu}
-            handleFilterMenu={handleFilterMenu}
-          />
-        </>
-      )}
-    </div>
+    <>
+      <Head>
+        <title>Short Circuit</title>
+        <meta name="keywords" content="shortcircuit" />{" "}
+      </Head>
+      <div className={Style.container}>
+        {isLoading && (
+          <div className={Style.loader}>
+            <Spin alt="loading-circle" indicator={antIcon} />
+            <h1>Loading...</h1>
+          </div>
+        )}
+        {!isLoading && (
+          <>
+            <Filter
+              handleFilter={handleFilter}
+              handlePrice={handlePrice}
+              handleAvail={handleAvail}
+              isAvailable={isAvailable}
+              handleSaveFilters={handleSaveFilters}
+              price={price}
+              addUser={addUser}
+              updateUser={updateUser}
+              user={user}
+              methods={methods}
+              filterMenu={filterMenu}
+              handleFilterMenu={handleFilterMenu}
+              filteredMarkers={filteredMarkers}
+              connectorsFilter={connectorsFilter}
+            />
+            <Map
+              location={location}
+              setLocation={setLocation}
+              setPostcode={setPostcode}
+              pointsNearby={markersOn}
+              filterMenu={filterMenu}
+              handleFilterMenu={handleFilterMenu}
+            />
+          </>
+        )}
+      </div>
+    </>
   );
 }
 
-//Dev 9.0 !!
+//Dev 9.0.byte :D!!

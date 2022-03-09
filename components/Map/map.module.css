@@ -19,7 +19,7 @@ Change pixels values to more responsive units;
 
 /* Dropdown bar */
 .dropdown {
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .dropdown .dropbtn {

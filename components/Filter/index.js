@@ -7,112 +7,54 @@ import {
 
 import Style from "./Filter.module.css";
 import { useState } from "react";
-import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
+import useBackend from "../../utils/hooks/useBackend";
 
 export default function Filter({
+  updateUser,
   handleFilter,
   handlePrice,
   handleAvail,
   isAvailable,
   handleSaveFilters,
+  price,
+  addUser,
+  user,
+  methods,
   filterMenu,
+  handleFilterMenu,
+  filteredMarkers,
+  connectorsFilter,
 }) {
-  const { user } = useUser();
-
-  // const [hamburger, setHamburger] = useState(true);
-
-  // export function handleHamburger() {
-  //   setHamburger(!hamburger);
-  // }
-
   function handleMenuClick(e) {
     message.info("Click on menu item.");
     console.log("click", e);
   }
 
+  {
+    isAvailable ? (
+      <input type="checkbox" onClick={handleAvail} checked />
+    ) : (
+      <input type="checkbox" onClick={handleAvail} />
+    );
+  }
   const connectiontypesMenu = ( //Menu Drop down
     <Menu className={Style.connectorMenu} onClick={handleMenuClick}>
-      <label className={Style.checkItem}>
-        3-pin Type G (BS1363)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("3-pin Type G (BS1363)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        JEVS G105 (CHAdeMO) DC
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("JEVS G105 (CHAdeMO) DC")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Type 1 SAEJ1772 (IEC 62196)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Type 1 SAEJ1772 (IEC 62196)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Type 2 Mennekes (IEC62196)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Type 2 Mennekes (IEC62196)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Type 3 Scame (IEC62196)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Type 3 Scame (IEC62196)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        CCS Type 2 Combo (IEC62196)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("CCS Type 2 Combo (IEC62196)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Type 2 Tesla (IEC62196) DC
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Type 2 Tesla (IEC62196) DC")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Commando 2P+E (IEC60309)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Commando 2P+E (IEC60309)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Commando 3P+N+E (IEC60309)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Commando 3P+N+E (IEC60309)")}
-        />
-      </label>
+      {connectorsFilter.map((connector) => {
+        return (
+          <>
+            <br />
+            <label className={Style.checkItem}>
+              {connector}
+              <input
+                type="checkbox"
+                defaultChecked={filteredMarkers?.includes(connector)}
+                onClick={() => handleFilter(connector)}
+              />
+            </label>
+          </>
+        );
+      })}
     </Menu>
   );
 
@@ -142,9 +84,10 @@ export default function Filter({
             <h3 className={Style.filterHeader}>Filter:</h3>
             <CloseSquareTwoTone
               style={{ marginTop: "-1rem" }}
-              // onClick={() => {
-              //   setHamburger(true);
-              // }}
+              onClick={() => {
+                handleFilterMenu();
+              }}
+              aria-label="close-filter-button"
             />
           </div>
 
@@ -154,7 +97,7 @@ export default function Filter({
             className={Style.slider}
             min={0}
             max={0.5}
-            defaultValue={0.45}
+            defaultValue={price}
             step={0.05}
             onAfterChange={handlePrice}
           />
@@ -178,11 +121,25 @@ export default function Filter({
 
           {user ? (
             <button
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault();
-                console.log(handleSaveFilters());
+                addUser(methods.FILTER, handleSaveFilters());
                 filtersSuccess();
               }}
+
+              // onClick={
+              //   async (e)=>{
+              //     e.preventDefault()
+              //     updateUser(methods.FILTER, {
+              //       filter_id: 10,
+              //       price: 0.4,
+              //       connector_type: ["CCS Type 2 Combo (IEC62196)"], 
+              //       availability: false,
+              //       filter_name: "I have been updated smile",
+
+              //     })
+              //   }
+              // }
             >
               Save Filters
             </button>
