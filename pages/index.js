@@ -13,6 +13,8 @@ import { useUser } from "@auth0/nextjs-auth0";
 
 //import Map from "../components/Map";
 
+export let savedFilters = [];
+
 export default function Home() {
   const { user } = useUser();
   const { addUser, deleteUser, updateUser, getUser, methods } = useBackend(
@@ -76,15 +78,16 @@ export default function Home() {
   }
 
   function handleSaveFilters() {
-    const savedFilters = {};
-    savedFilters.price = price;
-    savedFilters.connector_type = [...filteredMarkers];
-    console.log("savedconnectors", savedFilters.connector_type);
-    savedFilters.availability = isAvailable;
-    savedFilters.filter_name = "User Created Filter"
-
-    return savedFilters;
+    const newFilterObject = {
+      price: price,
+      connector_type: [...filteredMarkers],
+      availability: isAvailable,
+      filter_name: "User Created Filter"
+    };
+    return savedFilters.push(newFilterObject);
   }
+  //save savedFilter as spread array instead of an object
+  //then map over in the Drawers.js component
 
   useEffect(() => {
     console.log("User is ", user);
@@ -160,24 +163,24 @@ export default function Home() {
             <h1>Loading...</h1>
           </div>
         )}
-        
-      {!isLoading && (
-        <>
-          <Filter
-            handleFilter={handleFilter}
-            handlePrice={handlePrice}
-            handleAvail={handleAvail}
-            isAvailable={isAvailable}
-            handleSaveFilters={handleSaveFilters}
-            price={price}
-            addUser={addUser}
-            updateUser={updateUser}
-            user={user}
-            methods={methods}
-            filterMenu={filterMenu}
-            handleFilterMenu={handleFilterMenu}
-            
-          />
+        {!isLoading && (
+          <>
+            <Filter
+              handleFilter={handleFilter}
+              handlePrice={handlePrice}
+              handleAvail={handleAvail}
+              isAvailable={isAvailable}
+              handleSaveFilters={handleSaveFilters}
+              price={price}
+              addUser={addUser}
+              updateUser={updateUser}
+              user={user}
+              methods={methods}
+              filterMenu={filterMenu}
+              handleFilterMenu={handleFilterMenu}
+              filteredMarkers={filteredMarkers}
+              connectorsFilter={connectorsFilter}
+            />
             <Map
               location={location}
               setLocation={setLocation}
