@@ -7,6 +7,7 @@ async function userExists(id) {
 }
 
 export async function createUser({ user_id, username }) {
+  user_id = user_id ?? "tempfix"
   if (await userExists(user_id)) {
     return;
   }
@@ -46,7 +47,7 @@ export async function createComment(createObject) {
   });
 }
 
-export async function updateComment() {
+export async function updateComment(createObject) {
   const { location } = createObject ?? "";
   const { comment } = createObject ?? "No comment";
   const { date } = createObject ?? Null;

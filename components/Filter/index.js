@@ -5,114 +5,127 @@ import {
   CloseSquareTwoTone,
 } from "@ant-design/icons";
 
+import {ConnectionTypesMenu, listOfConnectors} from "./connectionTypesMenu";
+
 import Style from "./Filter.module.css";
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import Link from "next/link";
 import useBackend from "../../utils/hooks/useBackend";
 
 export default function Filter({
-  handleFilter,
-  handlePrice,
-  handleAvail,
-  isAvailable,
-  handleSaveFilters,
-  price,
   addUser,
   user,
   methods,
-  filterMenu,
-  handleFilterMenu,
+
 }) {
+
+  const [filteredMarkers, setFilteredMarkers] = useState(connectorsFilter);
+ 
+
+  const [filterMenu, setFilterMenu] = useState(false);
+  
+  const [filter, dispatchFilter] = useReducer(reduceFilter, {price:0040, connector_types: listOfConnectors, isAvailable:false})
+
+
+
+//Return list of filtered pins when filter passed in
+  const markersOn = pointsNearby.filter((point) => {
+    const numPrice =
+      point.Price === "Free"
+        ? 0
+        : +point.Price.replace(/(.)(.....)(....)/, "$2"); 
+
+    for (let i = 0; i < point.Connectors.length; i++) {
+      if (isAvailable) {
+        if (
+          filteredMarkers.includes(point.Connectors[i].ConnectorType) &&
+          numPrice <= price &&
+          point.Available === true
+        ) {
+          return true;
+        }
+      } else {
+        if (
+          filteredMarkers.includes(point.Connectors[i].ConnectorType) &&
+          numPrice <= price
+        ) {
+          return true;
+        }
+      }
+    }
+  });
+
+
+  useEffect(() => {
+    console.log("User is ", user);
+    if (!user) {
+      return;
+    } else {
+      (async () => {
+        const listOfFilters = await getUser(methods.FILTER);
+        if (listOfFilters.length === 0) {
+          return;
+        }
+        const latestFilter = listOfFilters[listOfFilters.length - 1];
+        console.log("All filters :", listOfFilters);
+        console.log("Latest filter is:", latestFilter);
+        setFilteredMarkers(() => latestFilter.connector_type);
+        console.log("connector type ", latestFilter.connector_type);
+        console.log("Filteredmarkers ", filteredMarkers);
+        setPrice(() => latestFilter.price);
+        console.log("Price state ", price);
+        setIsAvailable(() => latestFilter.availability);
+        console.log("isAvailable  ", isAvailable);
+      })();
+    }
+  }, [user]);
+
+
+
+
+  function handleFilter(connectorType) {
+    if (filteredMarkers.includes(connectorType)) {
+      let index = filteredMarkers.indexOf(connectorType);
+      setFilteredMarkers([
+        ...filteredMarkers.slice(0, index),
+        ...filteredMarkers.slice(index + 1),
+      ]);
+      console.log([
+        ...filteredMarkers.slice(0, index),
+        ...filteredMarkers.slice(index + 1),
+      ]);
+    } else {
+      setFilteredMarkers([...filteredMarkers, connectorType]);
+      console.log([...filteredMarkers, connectorType]);
+    }
+  }
+
+  function handlePrice(newPrice) {
+    setPrice(newPrice);
+  }
+
+  function handleAvail() {
+    setIsAvailable(!isAvailable);
+  }
+
+  function handleSaveFilters() {
+    const savedFilters = {};
+    savedFilters.price = price;
+    savedFilters.connector_type = [...filteredMarkers];
+    console.log("savedconnectors", savedFilters.connector_type);
+    savedFilters.availability = isAvailable;
+
+    return savedFilters;
+  }
+
+
 
   function handleMenuClick(e) {
     message.info("Click on menu item.");
     console.log("click", e);
   }
 
-  const connectiontypesMenu = ( //Menu Drop down
-    <Menu className={Style.connectorMenu} onClick={handleMenuClick}>
-      <label className={Style.checkItem}>
-        3-pin Type G (BS1363)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("3-pin Type G (BS1363)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        JEVS G105 (CHAdeMO) DC
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("JEVS G105 (CHAdeMO) DC")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Type 1 SAEJ1772 (IEC 62196)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Type 1 SAEJ1772 (IEC 62196)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Type 2 Mennekes (IEC62196)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Type 2 Mennekes (IEC62196)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Type 3 Scame (IEC62196)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Type 3 Scame (IEC62196)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        CCS Type 2 Combo (IEC62196)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("CCS Type 2 Combo (IEC62196)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Type 2 Tesla (IEC62196) DC
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Type 2 Tesla (IEC62196) DC")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Commando 2P+E (IEC60309)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Commando 2P+E (IEC60309)")}
-        />
-      </label>
-      <br />
-      <label className={Style.checkItem}>
-        Commando 3P+N+E (IEC60309)
-        <input
-          type="checkbox"
-          defaultChecked="true"
-          onClick={() => handleFilter("Commando 3P+N+E (IEC60309)")}
-        />
-      </label>
-    </Menu>
-  );
+  
 
   const marks = {
     0: "Free",
@@ -123,6 +136,26 @@ export default function Filter({
   const filtersSuccess = () => {
     message.success("Your filters have been saved.", 2.2);
   };
+
+  const connectionDropMenu=(
+  <Map>
+  {ConnectionTypesMenu.map((v)=>{
+    return(
+      <>
+            <label className={Style.checkItem}>
+        {v.name}
+        <input
+        type="checkbox"
+        defaultChecked="true"
+        onClick={()=> handleFilter(v.name)}
+        />
+      </label>
+      <br/>
+      </>
+    )
+  })}
+  </Map>
+  )
 
   return (
     <>
@@ -141,7 +174,7 @@ export default function Filter({
             <CloseSquareTwoTone
               style={{ marginTop: "-1rem" }}
               onClick={() => {
-                handleFilterMenu();
+                setFilterMenu(!filterMenu)
               }}
               aria-label="close-filter-button"
             />
@@ -158,7 +191,7 @@ export default function Filter({
             onAfterChange={handlePrice}
           />
 
-          <Dropdown overlay={connectiontypesMenu}>
+          <Dropdown overlay={connectionDropMenu}>
             <Button>
               Connection Types <DownOutlined />
             </Button>

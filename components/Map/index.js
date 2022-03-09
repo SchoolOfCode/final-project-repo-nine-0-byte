@@ -8,6 +8,7 @@ import { FullscreenControl } from "react-leaflet-fullscreen";
 import "react-leaflet-fullscreen/dist/styles.css";
 import { Typography, Rate, Tooltip } from "antd";
 
+
 // const position = [51.505, -0.09];
 
 const iconFast = L.icon({
@@ -36,9 +37,10 @@ export default function Map({
   setLocation,
   filterMenu,
   handleFilterMenu,
-  // searchSubmit,
   setPostcode,
 }) {
+
+
   const [editableStr, setEditableStr] = useState(
     "Comment about this charge point"
   );
