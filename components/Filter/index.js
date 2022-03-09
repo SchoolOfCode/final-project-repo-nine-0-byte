@@ -11,6 +11,7 @@ import Link from "next/link";
 import useBackend from "../../utils/hooks/useBackend";
 
 export default function Filter({
+  updateUser,
   handleFilter,
   handlePrice,
   handleAvail,
@@ -182,6 +183,20 @@ export default function Filter({
                 addUser(methods.FILTER, handleSaveFilters());
                 filtersSuccess();
               }}
+
+              // onClick={
+              //   async (e)=>{
+              //     e.preventDefault()
+              //     updateUser(methods.FILTER, {
+              //       filter_id: 10,
+              //       price: 0.4,
+              //       connector_type: ["CCS Type 2 Combo (IEC62196)"], 
+              //       availability: false,
+              //       filter_name: "I have been updated smile",
+
+              //     })
+              //   }
+              // }
             >
               Save Filters
             </button>

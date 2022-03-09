@@ -64,6 +64,7 @@ export default function useBackend({ user_id, username }) {
         await updateUserName(controlObject);
         break;
       case methods.FILTER:
+        controlObject.user_id = user_id;
         await updateFilter(controlObject);
         break;
       case methods.COMMENT:

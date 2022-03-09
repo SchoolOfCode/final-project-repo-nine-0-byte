@@ -81,6 +81,7 @@ export default function Home() {
     savedFilters.connector_type = [...filteredMarkers];
     console.log("savedconnectors", savedFilters.connector_type);
     savedFilters.availability = isAvailable;
+    savedFilters.filter_name = "User Created Filter"
 
     return savedFilters;
   }
@@ -130,7 +131,7 @@ export default function Home() {
         }
       } else {
         if (
-          filteredMarkers.includes(point.Connectors[i].ConnectorType) &&
+          filteredMarkers?.includes(point.Connectors[i].ConnectorType) &&
           numPrice <= price
         ) {
           return true;
@@ -170,10 +171,12 @@ export default function Home() {
             handleSaveFilters={handleSaveFilters}
             price={price}
             addUser={addUser}
+            updateUser={updateUser}
             user={user}
             methods={methods}
             filterMenu={filterMenu}
             handleFilterMenu={handleFilterMenu}
+            
           />
             <Map
               location={location}
