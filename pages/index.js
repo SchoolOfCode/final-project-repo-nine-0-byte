@@ -13,8 +13,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 
 //import Map from "../components/Map";
 
-
-export const savedFilters = {};
+export let savedFilters = [];
 
 export default function Home() {
   const { user } = useUser();
@@ -79,14 +78,15 @@ export default function Home() {
   }
 
   function handleSaveFilters() {
-
-    savedFilters.price = price;
-    savedFilters.connector_type = [...filteredMarkers];
-    console.log("savedconnectors", savedFilters.connector_type);
-    savedFilters.availability = isAvailable;
-
-    return savedFilters;
+    const newFilterObject = {
+      price: price,
+      connectorType: [...filteredMarkers],
+      availability: isAvailable,
+    };
+    return savedFilters.push(newFilterObject);
   }
+  //save savedFilter as spread array instead of an object
+  //then map over in the Drawers.js component
 
   useEffect(() => {
     console.log("User is ", user);
