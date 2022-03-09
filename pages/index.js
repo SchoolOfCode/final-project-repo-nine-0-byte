@@ -8,12 +8,24 @@ import Filter from "../components/Filter";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import Head from "next/head";
+import useBackend from "../utils/hooks/useBackend";
+import { useUser } from "@auth0/nextjs-auth0";
 
 //import Map from "../components/Map";
 
 export let savedFilters = [];
 
 export default function Home() {
+  const { user } = useUser();
+  const { addUser, deleteUser, updateUser, getUser, methods } = useBackend(
+    user
+      ? {
+          user_id: user.sub,
+          username: user.name,
+        }
+      : {}
+  );
+
   let connectorsFilter = [
     "3-pin Type G (BS1363)",
     "JEVS G105 (CHAdeMO) DC",
@@ -76,6 +88,30 @@ export default function Home() {
   //save savedFilter as spread array instead of an object
   //then map over in the Drawers.js component
 
+  useEffect(() => {
+    console.log("User is ", user);
+    if (!user) {
+      return;
+    } else {
+      (async () => {
+        const listOfFilters = await getUser(methods.FILTER);
+        if (listOfFilters.length === 0) {
+          return;
+        }
+        const latestFilter = listOfFilters[listOfFilters.length - 1];
+        console.log("All filters :", listOfFilters);
+        console.log("Latest filter is:", latestFilter);
+        setFilteredMarkers(() => latestFilter.connector_type);
+        console.log("connector type ", latestFilter.connector_type);
+        console.log("Filteredmarkers ", filteredMarkers);
+        setPrice(() => latestFilter.price);
+        console.log("Price state ", price);
+        setIsAvailable(() => latestFilter.availability);
+        console.log("isAvailable  ", isAvailable);
+      })();
+    }
+  }, [user]);
+
   // useEffect(() => {
   //   if (pointsNearby) {
   //     setMarkersOn(
@@ -112,7 +148,7 @@ export default function Home() {
   // }, [filteredMarkers, price, isAvailable]);
 
   const antIcon = <LoadingOutlined style={{ fontSize: 56 }} spin />;
-
+  console.log("visible markers:", markersOn);
   return (
     <>
       <Head>
@@ -126,18 +162,22 @@ export default function Home() {
             <h1>Loading...</h1>
           </div>
         )}
-        {!isLoading && (
-          <>
-            <Filter
-              handleFilter={handleFilter}
-              handlePrice={handlePrice}
-              handleAvail={handleAvail}
-              isAvailable={isAvailable}
-              handleSaveFilters={handleSaveFilters}
-              filterMenu={filterMenu}
-              handleFilterMenu={handleFilterMenu}
-            />
-
+        
+      {!isLoading && (
+        <>
+          <Filter
+            handleFilter={handleFilter}
+            handlePrice={handlePrice}
+            handleAvail={handleAvail}
+            isAvailable={isAvailable}
+            handleSaveFilters={handleSaveFilters}
+            price={price}
+            addUser={addUser}
+            user={user}
+            methods={methods}
+            filterMenu={filterMenu}
+            handleFilterMenu={handleFilterMenu}
+          />
             <Map
               location={location}
               setLocation={setLocation}
