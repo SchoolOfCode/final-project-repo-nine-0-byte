@@ -10,12 +10,14 @@ import { LoadingOutlined } from "@ant-design/icons";
 import Head from "next/head";
 import useBackend from "../utils/hooks/useBackend";
 import { useUser } from "@auth0/nextjs-auth0";
+import { loadFilter } from "../components/Drawers";
 
 //import Map from "../components/Map";
 
+//this is needed by the Drawers component
 export let savedFilters = [];
 
-export default function Home() {
+export default function Home({ loadFilter }) {
   const { user } = useUser();
   const { addUser, deleteUser, updateUser, getUser, methods } = useBackend(
     user
@@ -26,6 +28,8 @@ export default function Home() {
       : {}
   );
 
+  console.log("initial savedFilters", savedFilters);
+  console.log(loadFilter);
   let connectorsFilter = [
     "3-pin Type G (BS1363)",
     "JEVS G105 (CHAdeMO) DC",
@@ -82,11 +86,10 @@ export default function Home() {
       price: price,
       connector_type: [...filteredMarkers],
       availability: isAvailable,
-      filter_name: "User Created Filter"
-      
+      filter_name: "User Created Filter",
     };
     savedFilters.push(newFilterObject);
-    return newFilterObject
+    return newFilterObject;
   }
   //save savedFilter as spread array instead of an object
   //then map over in the Drawers.js component
@@ -102,19 +105,29 @@ export default function Home() {
           return;
         }
         const latestFilter = listOfFilters[listOfFilters.length - 1];
-        console.log("All filters :", listOfFilters);
-        console.log("Latest filter is:", latestFilter);
         setFilteredMarkers(() => latestFilter.connector_type);
-        console.log("connector type ", latestFilter.connector_type);
-        console.log("Filteredmarkers ", filteredMarkers);
         setPrice(() => latestFilter.price);
-        console.log("Price state ", price);
         setIsAvailable(() => latestFilter.availability);
-        console.log("isAvailable  ", isAvailable);
+        savedFilters = listOfFilters;
+        console.log("Saved filters is ", savedFilters);
       })();
     }
   }, [user]);
 
+  useEffect(() => {
+    if (loadFilter === 0) {
+      console.log("load filter empty");
+      return;
+    } else {
+      (async () => {
+        setFilteredMarkers(loadFilter.connector_type);
+        setPrice(loadFilter.price);
+        setIsAvailable(loadFilter.availability);
+        setFilterMenu(false);
+        console.log("Home. Loaded filter is ", loadFilter);
+      })();
+    }
+  }, [loadFilter]);
   // useEffect(() => {
   //   if (pointsNearby) {
   //     setMarkersOn(
