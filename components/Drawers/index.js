@@ -6,7 +6,8 @@ function callback(key) {
   console.log(key);
 }
 
-const Drawers = ({ visible, onClose }) => {
+const Drawers = ({ visible, onClose, drawerFilterLoad }) => {
+  console.log(drawerFilterLoad);
   return (
     <>
       <Drawer
@@ -16,29 +17,42 @@ const Drawers = ({ visible, onClose }) => {
         visible={visible}
       >
         <Collapse onChange={callback}>
-          {savedFilters &&
-            savedFilters.map((filter, i) => (
-              <Panel header={`Filter ${i + 1}`} key={i + 1}>
-                <p>Price: {filter.price}</p>
-                <p>
-                  Connectors Type:{" "}
-                  {filter.connectorType?.map((item, i) => (
-                    <ul key={i}>
-                      <li>{item}</li>
-                    </ul>
-                  ))}
-                </p>
-                <p>Availability: {JSON.stringify(filter.availability)}</p>
-                <button>Go to your filter</button>
-              </Panel>
-            ))}
-
-          {/* <Panel header="This is panel header 2" key="2">
-       <p>{text}</p>
-     </Panel>
-     <Panel header="This is panel header 3" key="3">
-       <p>{text}</p>
-     </Panel> */}
+          {savedFilters !== Promise
+            ? savedFilters.map((filter, i) => (
+                <Panel
+                  header={
+                    filter.filter_name !== "User Created Filter"
+                      ? filter.filter_name
+                      : `Filter ${i + 1}`
+                  }
+                  key={i + 1}
+                >
+                  <p>Price: {filter.price === 0 ? "Free" : filter.price}</p>
+                  <p>
+                    Connector Types:{" "}
+                    {filter.connector_type?.map((item, i) => (
+                      <ul key={i}>
+                        <li>{item}</li>
+                      </ul>
+                    ))}
+                  </p>
+                  <p>
+                    Availability:{" "}
+                    {JSON.stringify(filter.availability)
+                      ? "Available Only"
+                      : "Any"}
+                  </p>
+                  <button
+                    onClick={() => {
+                      drawerFilterLoad(filter);
+                      onClose();
+                    }}
+                  >
+                    Load filter
+                  </button>
+                </Panel>
+              ))
+            : "Loading..."}
         </Collapse>
       </Drawer>
     </>
