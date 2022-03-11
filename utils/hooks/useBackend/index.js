@@ -11,7 +11,7 @@ import {
   deleteFilter,
   deleteUserName,
   getFilter,
-  getComment,
+  getComments,
   getUserName,
 } from "./crudFunctions.js";
 // import { API } from '../../../config.js'
@@ -35,18 +35,17 @@ export default function useBackend({ user_id, username }) {
 
   async function addUser(method, controlObject) {
     controlObject = controlObject ?? {};
+    controlObject.user_id = user_id
 
     method = method ?? methods.USERS;
 
     switch (method) {
       case methods.USERS:
-        controlObject.user_id = user_id;
         controlObject.username = username;
         console.log("Expecting >> to equal, id and username", controlObject);
         await createUser(controlObject);
         break;
       case methods.FILTER:
-        controlObject.user_id = user_id;
         await createFilter(controlObject);
         break;
       case methods.COMMENT:
@@ -57,16 +56,15 @@ export default function useBackend({ user_id, username }) {
 
   async function updateUser(method, controlObject) {
     controlObject = controlObject ?? {};
+    controlObject.user_id = user_id
 
     method = method ?? methods.USERS;
 
     switch (method) {
       case methods.USERS:
-        controlObject.user_id = user_id;
         await updateUserName(controlObject);
         break;
       case methods.FILTER:
-        controlObject.user_id = user_id;
         await updateFilter(controlObject);
         break;
       case methods.COMMENT:
@@ -77,6 +75,7 @@ export default function useBackend({ user_id, username }) {
 
   const deleteUser = async (method, controlObject) => {
     controlObject = controlObject ?? {};
+    controlObject.user_id = user_id
 
     method = method ?? methods.USERS;
 
@@ -84,7 +83,6 @@ export default function useBackend({ user_id, username }) {
 
     switch (method) {
       case methods.USERS:
-        controlObject.user_id = user_id;
         await deleteUserName(controlObject);
         break;
       case methods.FILTER:
@@ -98,23 +96,20 @@ export default function useBackend({ user_id, username }) {
 
   async function getUser(method, controlObject) {
     controlObject = controlObject ?? {};
+    controlObject.user_id = user_id
 
     method = method ?? methods.USERS;
-
     switch (method) {
       case methods.USERS:
-        controlObject.user_id = user_id;
         controlObject.username = username;
         console.log("Expecting >> to equal, id and username", controlObject);
-        await getUserName(controlObject);
-        break;
+       return await getUserName(controlObject);
+       
       case methods.FILTER:
-        controlObject.user_id = user_id;
         return await getFilter(controlObject);
       //break;
       case methods.COMMENT:
-        await getComment(controlObject);
-        break;
+        return await getComments(controlObject);
     }
   }
 

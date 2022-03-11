@@ -1,0 +1,9 @@
+.comment_section{
+    height:300px;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.comment{
+    border:1px, black solid
+}

@@ -9,8 +9,9 @@ export default function useGetPOI(location, setIsLoading) {
         const res = undefined;
 
         try {
+          const req = `${process.env.NEXT_PUBLIC_BACKEND_URL}chargingstation?lat=${location[0]}&long=${location[1]}`
           res = await fetch(
-            `https://short-circut-api.herokuapp.com/chargingstation?lat=${location[0]}&long=${location[1]}`
+            req
           ).then((res) => res.json());
 
           // if (typeof await res !== Array) { throw "Incorrect type back from API" }

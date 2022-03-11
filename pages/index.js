@@ -7,10 +7,10 @@ import Style from "../styles/Home.module.css";
 import Filter from "../components/Filter";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import Head from "next/head";
 import useBackend from "../utils/hooks/useBackend";
 import { useUser } from "@auth0/nextjs-auth0";
 import { loadFilter } from "../components/Drawers";
+
 
 //import Map from "../components/Map";
 
@@ -167,10 +167,7 @@ export default function Home({ loadFilter }) {
   console.log("visible markers:", markersOn);
   return (
     <>
-      <Head>
-        <title>Short Circuit</title>
-        <meta name="keywords" content="shortcircuit" />{" "}
-      </Head>
+
       <div className={Style.container}>
         {isLoading && (
           <div className={Style.loader}>
@@ -211,6 +208,4 @@ export default function Home({ loadFilter }) {
   );
 }
 
-//Main
-//9.0
-//Redeploy
+//Dev 10.0
