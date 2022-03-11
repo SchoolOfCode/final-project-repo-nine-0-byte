@@ -7,6 +7,7 @@ async function userExists(id) {
 }
 
 export async function createUser({ user_id, username }) {
+  console.log(user_id,"<<<<<<<<<<<<<<<<<USER ID")
   if (await userExists(user_id)) {
     return;
   }
@@ -38,7 +39,7 @@ export async function createComment(createObject) {
   const { comment } = createObject;
   const { date } = createObject;
   const { visibility } = createObject;
-
+  const {user_id} = createObject
   return await callApi("comments", "POST", {
     user_id,
     location,
@@ -115,7 +116,7 @@ export async function getFilter({ user_id }) {
 //   return await callApi(`filters/${filter_id}`, "GET");
 // }
 
-export async function getComment(commentId) {
-  const { comment_id } = commentId;
-  return await callApi(`comments/${comment_id}`, "GET");
+export async function getComments(getObject) {
+  const { pin_location } = commentId;
+  return await callApi(`comments/${pin_location}`, "GET");
 }

@@ -7,6 +7,7 @@ import { DownOutlined, ThunderboltFilled } from "@ant-design/icons";
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import "react-leaflet-fullscreen/dist/styles.css";
 import { Typography, Rate, Tooltip } from "antd";
+import CommentsSection from "../CommentsSection";
 
 // const position = [51.505, -0.09];
 
@@ -28,7 +29,7 @@ const iconEvcar = L.icon({
   iconAnchor: [37, 35],
 });
 
-const { Paragraph } = Typography;
+
 
 export default function Map({
   location,
@@ -39,9 +40,7 @@ export default function Map({
   // searchSubmit,
   setPostcode,
 }) {
-  const [editableStr, setEditableStr] = useState(
-    "Comment about this charge point"
-  );
+
 
   console.log(pointsNearby);
   return (
@@ -112,10 +111,14 @@ export default function Map({
                         defaultValue={3}
                       />
                     </p>
-                    <Paragraph editable={{ onChange: setEditableStr }}>
-                      {editableStr}
-                    </Paragraph>
+                   
                   </div>
+
+                  <CommentsSection
+                  comments={item.comments}
+                  location={item.location}
+                  />
+                   
                   {/* </div> */}
                 </Popup>
               </Marker>
