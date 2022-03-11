@@ -11,7 +11,7 @@ export default function CommentsSection({ comments, location }) {
 
 
     const { user } = useUser()
-    const {addUser, methods} = useBackend({user_id: user.sub, username:user.name})
+    const {addUser, methods} = useBackend({user_id: user?.sub, username:user?.name})
     const { Paragraph } = Typography;
     const [editableStr, setEditableStr] = useState(
         "Comment about this charge point"
