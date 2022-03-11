@@ -9,7 +9,7 @@ import moment from "moment"
 
 export default function CommentsSection({ comments, location }) {
 
-
+    const [localComments, setLocalComments] = useState(comments)
     const { user } = useUser()
     const {addUser, methods} = useBackend({user_id: user?.sub, username:user?.name})
     const { Paragraph } = Typography;
@@ -18,12 +18,21 @@ export default function CommentsSection({ comments, location }) {
       );
 
       function sendComment(message){
-    
+        if(message === "Comment about this charge point"){return}
+        const newComment = {
+          user_id: user.sub,
+          username:user.name,
+          location: location,
+          comment : message,
+          date : moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+          visibility: true,
+        }
+      setLocalComments(()=>[...localComments, newComment ])
        addUser(methods.COMMENT,
         {
             location: location,
             comment : message,
-            date : moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+            date : newComment.date,
             visibility: true,
         }
         )
@@ -33,7 +42,7 @@ export default function CommentsSection({ comments, location }) {
       <div className={Style.comment_section}>
         <p>Comment section:</p>
         
-        {comments?.map(v => {
+        {localComments?.map(v => {
           return <CommentItem author={v.username} comment={v.comment} />;
         })}
 
