@@ -8,9 +8,8 @@ import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import Drawers from "../Drawers";
 
-export default function Header() {
+export default function Header({ drawerFilterLoad }) {
   const [visible, setVisible] = useState(false);
-
   const showDrawer = () => {
     setVisible(true);
   };
@@ -69,7 +68,13 @@ export default function Header() {
           </Dropdown>
         </div>
       </header>
-      {visible ? <Drawers visible={visible} onClose={onClose} /> : null}
+      {visible ? (
+        <Drawers
+          visible={visible}
+          onClose={onClose}
+          drawerFilterLoad={drawerFilterLoad}
+        />
+      ) : null}
     </>
   );
 }
