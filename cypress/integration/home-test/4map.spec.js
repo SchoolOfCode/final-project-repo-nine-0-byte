@@ -7,13 +7,13 @@ describe("Map", () => {
     cy.get(".leaflet-tile-loaded").should("be.visible");
   });
 
-  it("should load the user position and be clickable", () => {
-    cy.get("[alt='user-position']").should("be.visible").click();
-  });
-
-  it("should load the chargers positions an be clickable", () => {
+  it("should load the chargers positions and be clickable", () => {
     cy.get("[alt='charger-position']")
       .should("be.visible")
       .click({ multiple: true, force: true });
+  });
+  
+  it("should close the currently opened popup box", () => {
+    cy.get(".leaflet-popup-close-button").should("be.visible").click();
   });
 });
