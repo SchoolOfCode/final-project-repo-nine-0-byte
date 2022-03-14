@@ -38,9 +38,7 @@ const Drawers = ({ visible, onClose, drawerFilterLoad }) => {
                   </p>
                   <p>
                     Availability:{" "}
-                    {JSON.stringify(filter.availability)
-                      ? "Available Only"
-                      : "Any"}
+                    {filter.availability ? "Available Only" : "Any"}
                   </p>
                   <button
                     onClick={() => {
