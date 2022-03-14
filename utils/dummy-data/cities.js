@@ -32,6 +32,17 @@ const cities = [
   { city: "peterborough", postcode: "PE1 1AB" },
   { city: "stoke", postcode: "ST4 6QS" },
   { city: "glasgow", postcode: "G1 3SQ" },
+  { city: "coventry", postcode: "CV1 5AB" },
+  { city: "norwich", postcode: "NR2 1ND" },
+  { city: "aberdeen", postcode: "AB11 6LX" },
+  { city: "aberystwyth", postcode: "SY23 3BU" },
+  { city: "blackpool", postcode: "FY1 2AB" },
+  { city: "reading", postcode: "RG1 1LZ" },
+  { city: "oxford", postcode: "OX1 1HS" },
+  { city: "exeter", postcode: "EX4 3SB" },
+  { city: "stockton", postcode: "TS18 2BP" },
+  { city: "middlesbrough", postcode: "TS1 1EG" },
+  { city: "plymouth", postcode: "PL4 6AB" },
 ];
 
 export default cities;
